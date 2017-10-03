@@ -61,4 +61,8 @@ app.use((req, res) => {
 });
 
 // server listens for requests
+<<<<<<< HEAD
 app.listen(process.env.PORT || 3000);
+=======
+app.listen(3000);
+>>>>>>> Get server fixed
