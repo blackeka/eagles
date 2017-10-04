@@ -188,9 +188,7 @@ class RouterWrapper extends Component {
                 />
               )}
             />
-            <Route path='/lesson/:id'
-              render={ ()=> ( component={ Lesson } ) }
-            />
+            <Route path='/lesson/:id' component={ Lesson } />
             <Route path='/create'
               render={ () => (
                 <LessonCreator

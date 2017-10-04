@@ -18,7 +18,7 @@ class NavBar extends Component {
   }
 
   handleSearchSubmit(event) {
-    // event.preventDefault();
+    // event.preventDefault(); //why does search work when dont preventDefault?
     this.props.queryDataBaseWithSearchInput(this.state.searchInput);
   }
 
