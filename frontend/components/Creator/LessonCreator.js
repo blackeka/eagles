@@ -140,7 +140,7 @@ class LessonCreator extends React.Component {
       description: event.target.value
     });
   }
-  
+
   changeCreateState (event) {
     console.log('changingcreatestate')
     this.setState({
@@ -169,18 +169,10 @@ class LessonCreator extends React.Component {
       oldSlide: ''
     });
   }
-  // goHome (event) {
-  //   fetch('/',{
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type":"application/json"
-  //     },
-  //     credentials: "include"
-  //   })
-  // }
+
   fetchSlideFromSlideCreator (result) {
     console.log(result);
-    var slideName = result.name; 
+    var slideName = result.name;
     var slideId = result._id;
     console.log('this is the result line119 lessoncreator', result);
     this.setState({
@@ -198,14 +190,14 @@ class LessonCreator extends React.Component {
             </div>
           </FormGroup>
 
-          { this.state.lessonid === 'No ID Yet' ? null : 
+          { this.state.lessonid === 'No ID Yet' ? null :
             (<ListGroup>
               <ListGroupItem>Lesson Name: {this.state.name}</ListGroupItem>
               <ListGroupItem>Lesson Description: {this.state.description}</ListGroupItem>
               <ListGroupItem>Lesson Tags: {this.state.keyWords.join(', ')}</ListGroupItem>
-            </ListGroup>) 
+            </ListGroup>)
           }
-
+        {/*Below is name description component shown when no lession id is present*/}
           { this.state.lessonid === 'No ID Yet' ? (<FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Lesson Name</Col>
             <Col sm={10}>
@@ -215,7 +207,7 @@ class LessonCreator extends React.Component {
               />
             </Col>
           </FormGroup>) : null }
-          
+          {/*Below is lesson description component shown when no lession id is present*/}
           { this.state.lessonid === 'No ID Yet' ? (<FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Lesson description</Col>
             <Col sm={10}>
@@ -225,46 +217,50 @@ class LessonCreator extends React.Component {
               />
             </Col>
           </FormGroup>) : null }
-          
 
+          {/*if there is a lesson id, add tags to lesson appears*/}
           {this.state.lessonid === 'No ID Yet' ? null : <FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Add Tags To Lesson</Col>
             <Col sm={10}>
-                <FormControl type='text' 
+                <FormControl type='text'
                   value={this.state.clientShownKeyWords}
                   onChange={this.changeClientKeyWords.bind(this)}
                 />
-                <Button onClick={this.keyWordSubmit.bind(this)} 
-                  bsStyle="info" 
+                <Button onClick={this.keyWordSubmit.bind(this)}
+                  bsStyle="info"
                   bsSize="small"> Set Tags </Button>
             </Col>
           </FormGroup>}
 
-          
+
           <FormGroup>
-            { 
-              this.state.lessonid === 'No ID Yet' ? 
+
+            {/*if there is no id make lesson button is shown */
+              this.state.lessonid === 'No ID Yet' ?
               (<Col smOffset={1} sm={1}>
                 <Button type="submit" bsStyle="primary" bsSize="small">
                   Make Lesson
                 </Button>
               </Col>) :
+              /*if there is a lesson id then slide creator button appears*/
               (<Col smOffset={1} sm={1}>
-                <Button 
+                <Button
                 onClick={this.changeCreateState.bind(this)}
-                bsStyle="primary" 
+                bsStyle="primary"
                 bsSize="small">Go To Slide Creator</Button>
               </Col>)
             }
+
             {this.state.lessonid === 'No ID Yet' ? null :
+            /*if the is an id go to make new lesson button appears*/
               (<Col smOffset={1} sm={1}>
-                <Button type="button" 
-                  onClick={this.reset.bind(this)} 
-                  bsStyle="warning" 
+                <Button type="button"
+                  onClick={this.reset.bind(this)}
+                  bsStyle="warning"
                   bsSize="small">Make New Lesson</Button>
               </Col>)
             }
-            { 
+            {
               <Col smOffset={1} sm={1}>
                 <Link to='/'>
                   <Button type="button" bsStyle="warning" bsSize="small">Go Home</Button>
@@ -273,15 +269,15 @@ class LessonCreator extends React.Component {
             }
           </FormGroup>
           {
-            this.state.slides.length === 0 ? 
-            (<div>No Slides Yet</div>) 
-            : 
-            (<div>Lesson Slides: 
+            this.state.slides.length === 0 ?
+            (<div>No Slides Yet</div>)
+            :
+            (<div>Lesson Slides:
               {
                 this.state.slides.map((slide,i) => {
-                  return <Button key={i} 
+                  return <Button key={i}
                   onClick={this.seeOldSlideFromLesson.bind(this,slide)}
-                  bsStyle="info" 
+                  bsStyle="info"
                   bsSize="small">
                   {slide}
                   </Button>
@@ -299,19 +295,18 @@ class LessonCreator extends React.Component {
             <ListGroupItem>Lesson Description: {this.state.description}</ListGroupItem>
             <ListGroupItem>Lesson Tags: {this.state.keyWords.join(', ')}</ListGroupItem>
           </ListGroup>
-          <SlideCreator 
-            slide={{}} 
-            lessonRef={this.state.lessonid} 
-            fetch={this.fetchSlideFromSlideCreator.bind(this)} 
-            changeCreateState={this.changeCreateState.bind(this)} 
+          <SlideCreator
+            slide={{}}
+            lessonRef={this.state.lessonid}
+            fetch={this.fetchSlideFromSlideCreator.bind(this)}
+            changeCreateState={this.changeCreateState.bind(this)}
             changeEditingOldSlide={this.changeEditingOldSlide.bind(this)}>
           </SlideCreator>
-          <div>Lesson Slides: 
+          <div>Lesson Slides:
             {
               this.state.slides.map((slide,i) => {
-                return <Button key={i} 
-                onClick={this.seeOldSlide.bind(this,slide)}
-                bsStyle="info" 
+                return <Button key={i}
+                bsStyle="info"
                 bsSize="small">{slide}</Button>
               })
             }
@@ -327,17 +322,17 @@ class LessonCreator extends React.Component {
             <ListGroupItem>Lesson Description: {this.state.description}</ListGroupItem>
             <ListGroupItem>Lesson Tags: {this.state.keyWords.join(', ')}</ListGroupItem>
           </ListGroup>
-          <SlideCreator 
-            slide={this.state.oldSlide} 
-            lessonRef={this.state.lessonid} 
-            fetch={this.fetchSlideFromSlideCreator.bind(this)} 
-            changeCreateState={this.changeCreateState.bind(this)} 
+          <SlideCreator
+            slide={this.state.oldSlide}
+            lessonRef={this.state.lessonid}
+            fetch={this.fetchSlideFromSlideCreator.bind(this)}
+            changeCreateState={this.changeCreateState.bind(this)}
             changeEditingOldSlide={this.changeEditingOldSlide.bind(this)}>
           </SlideCreator>
         </div>
       )
     }
-  }   
+  }
 }
 
 export default LessonCreator;

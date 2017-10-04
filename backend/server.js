@@ -42,6 +42,7 @@ app.get('/logout', checkAuth.logout);
 app.post('/users', checkAuth.createAccount);
 app.post('/login', checkAuth.attemptLoggin);
 app.use(checkAuth.checkUser);
+
 // ------------------------------------------------ //
 
 // handle protected routes
@@ -61,8 +62,4 @@ app.use((req, res) => {
 });
 
 // server listens for requests
-<<<<<<< HEAD
 app.listen(process.env.PORT || 3000);
-=======
-app.listen(3000);
->>>>>>> Get server fixed

@@ -13,7 +13,7 @@ class RouterWrapper extends Component {
     super(props);
     this.state = {
       lessons: [],
-      loggedIn: true,
+      loggedIn: false,
       displayLogginError: false,
       user: {}
     };
