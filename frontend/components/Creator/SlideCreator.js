@@ -33,6 +33,15 @@ class SlideCreator extends React.Component {
     this.submitSlide()
   }
 
+  editState(name, youTubeUrl, text, quizUrlkey){
+    this.setState({
+      name,
+      youTubeUrl,
+      quizUrlkey,
+      text
+    })
+  }
+
   submitSlide(){
     if (this.state.name !== '') {
       if (this.state.youTubeUrl !== '') {
@@ -213,7 +222,7 @@ class SlideCreator extends React.Component {
       );
     } else {
       return (
-        <Uploader uploadToggle={this.uploadToggle.bind(this)}/>
+        <Uploader editState={this.editState.bind(this)} uploadToggle={this.uploadToggle.bind(this)} submitSlide={this.submitSlide.bind(this)}/>
       )
     }
   }
