@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Panel } from 'react-bootstrap';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Panel, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -8,8 +8,20 @@ class Login extends Component {
       username: '',
       password: '',
       creatingAccount: false,
-      email: ''
+      email: '',
+      role: '',
+      radioVal: 1
     }
+    this.onRoleChange = this.onRoleChange.bind(this);
+  }
+
+  onRoleChange(val) {
+    let rolez = ['teacher', 'student'];
+    var selectedRole = rolez[val-1];
+    this.setState({
+      role: selectedRole,
+      radioVal: val
+    })
   }
 
   render() {
@@ -17,7 +29,7 @@ class Login extends Component {
         <Form horizontal onSubmit={(e) => e.preventDefault()}>
           <FormGroup>
             {
-              this.props.displayLogginError ? 
+              this.props.displayLogginError ?
               (<Panel header='Login Error!' bsStyle="danger"></Panel>) : ''
             }
           </FormGroup>
@@ -40,7 +52,8 @@ class Login extends Component {
             </Col>
           </FormGroup>
           { this.state.creatingAccount ?
-          (<FormGroup>
+          ( <div>
+            <FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Email</Col>
             <Col sm={10}>
               <FormControl type='email' placeholder='Email'
@@ -48,7 +61,18 @@ class Login extends Component {
                 onChange={(e) => this.setState({ email: e.target.value })}
               />
             </Col>
-          </FormGroup>) : ''
+          </FormGroup>
+
+          <ButtonToolbar>
+            <ToggleButtonGroup type='radio' name='options' value={this.state.radioVal} onChange={this.onRoleChange}>
+              <ToggleButton value={1}> Teacher </ToggleButton>
+              <ToggleButton value={2}> Student </ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
+
+          </div>
+          )
+          : ''
           }
       { !this.state.creatingAccount ? (
           <FormGroup>
@@ -68,7 +92,7 @@ class Login extends Component {
                 Go Back
               </Button>
               <Button onClick={() => {
-                this.props.createAccount(this.state.username, this.state.password, this.state.email);
+                this.props.createAccount(this.state.username, this.state.password, this.state.email, this.state.role);
                 }}>
                 Create Account!
               </Button>
