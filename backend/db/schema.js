@@ -1,5 +1,5 @@
 /*
-Schemas for each part. 
+Schemas for each part.
 user,tutorial,lesson,slide
 //don't mind the {type:String, required: true} it could just be String
 
@@ -17,7 +17,8 @@ var userSchema = new Schema({
   lessons: [String],
   favorites: [String],
   createdLessons:[String],
-  email: String
+  email: String,
+  role: String
 });
 var User = mongoose.model('User', userSchema);
 
@@ -52,4 +53,3 @@ module.exports = {
   Lesson: Lesson,
   Slide: Slide
 }
-
