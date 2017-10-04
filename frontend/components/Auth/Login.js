@@ -9,7 +9,7 @@ class Login extends Component {
       password: '',
       creatingAccount: false,
       email: '',
-      role: '',
+      role: 'teacher',
       radioVal: 1
     }
     this.onRoleChange = this.onRoleChange.bind(this);

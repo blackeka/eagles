@@ -7,6 +7,7 @@ import LessonCreator from './Creator/LessonCreator';
 import User from './User';
 import Login from './Auth/Login';
 import StudentDashboard from './StudentDashboard';
+import TeacherDashboard from './TeacherDashboard';
 
 class RouterWrapper extends Component {
   constructor(props) {
@@ -160,11 +161,20 @@ class RouterWrapper extends Component {
             (  this.state.user.role === 'teacher' ?
               (<Switch>
             <Route exact path='/'
+              render={ () => (
+                <TeacherDashboard
+                  username={this.state.user.username}
+                  userRef={this.state.user._id}
+                />
+              )}
+            />
+            <Route exact path='/lessons'
               render={() => (
                 <LessonPreviewContainer
                   lessons= { this.state.lessons }
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }
+                  teacherId={this.state.user._id}
                 />
               )}
             />
@@ -193,9 +203,11 @@ class RouterWrapper extends Component {
           </Switch>)
          : //student routes
          (<Switch>
-            <Route exact path='/student'
+            <Route exact path='/'
               render={() => (
-                <StudentDashboard />
+                <StudentDashboard
+                  studentname={this.state.user.username}
+                  />
               )}
             />
             <Route path='/lesson/:id'

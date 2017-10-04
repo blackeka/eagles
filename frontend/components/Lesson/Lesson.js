@@ -18,10 +18,10 @@ class Lesson extends React.Component {
   }
 
   componentDidMount() {
-    return fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" }) 
+    return fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" })
       .then((response) => response.json())
       .then((lessonDataJSON) => {
-        // console.log('LESSON DATA', lessonDataJSON); 
+        // console.log('LESSON DATA', lessonDataJSON);
         this.setState({
           specificLesson: lessonDataJSON,
           slides: lessonDataJSON.slides
@@ -31,7 +31,7 @@ class Lesson extends React.Component {
   }
 
   onLessonSlideListEntryClick(index) {
-    
+
     var videoIdInUrl = this.state.slides[index].youTubeUrl;
     var sliceFrom = videoIdInUrl.indexOf('=');
     var videoId = videoIdInUrl.slice(sliceFrom + 1);
@@ -41,7 +41,7 @@ class Lesson extends React.Component {
       videoIdOfClickedOnVideo: videoId
     });
   }
-  
+
   exit() {
     this.setState({
       currentSlide: '',
@@ -78,7 +78,7 @@ class Lesson extends React.Component {
   renderVideo(thereIsAVideo) {
     if (thereIsAVideo) {
       return <iframe style={{width: 500, height: 350, float: "left"}} className="youtubeVideo" src={'https://www.youtube.com/embed/' + thereIsAVideo} allowFullScreen></iframe>
-    } 
+    }
   }
 
   likeALesson() {
@@ -113,8 +113,8 @@ class Lesson extends React.Component {
     return (
       <div>
         { this.state.currentSlide ? (
-          <Slide 
-          slideData={this.state.currentSlide} 
+          <Slide
+          slideData={this.state.currentSlide}
           videoIdOfClickedOnVideo={this.state.videoIdOfClickedOnVideo}
           renderVideo={this.renderVideo(this.state.videoIdOfClickedOnVideo)}
           previousSlideClick={this.previousSlideClick.bind(this)}
