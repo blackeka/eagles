@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactFileReader from 'react-file-reader';
 import axios from 'axios'
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 class Uploader extends React.Component {
   constructor(props){
@@ -138,14 +139,29 @@ class Uploader extends React.Component {
   render(){
     return(
       <div>
-        < ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
-          <button className='btn'>Upload</button>
-        </ReactFileReader>
-        <button className='btn' onClick={this.props.uploadToggle}>Go Back</button>
+      <Form horizontal>
+        <FormGroup>
+          <div className='slideCreator'>
+            <ControlLabel>Slide Uploader</ControlLabel>
+          </div>
+        </FormGroup>
+        <h6>Please upload a CSV with headers 'quiz','text','youtubeurl' and 'name'. Name is required.</h6 >
+        <FormGroup>
+          <Col smOffset={0} sm={2}>
+            <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
+              <Button className='btn' bsStyle="primary" bsSize="small">Upload</Button>
+            </ReactFileReader>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col smOffset={0} sm={2}>
+            <Button className='btn' onClick={this.props.uploadToggle} bsStyle="warning" bsSize="small">
+              Go Back
+            </Button>
+          </Col>
+        </FormGroup>
         <br/>
-        <br/>
-        <br/>
-        <br/>
+      </Form >
       </div>
     )
   }
