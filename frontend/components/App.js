@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from './NavBar';
+import Question from './Creator/QuestionForm.js';
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
           userRole = {this.props.userRole}
           isLoggedIn = {this.props.isLoggedIn}
         />
+        <Question />
         { this.props.children || 'no children!' }
       </div>
     );
