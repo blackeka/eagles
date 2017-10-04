@@ -10,7 +10,7 @@ exports.attemptLoggin = (req, res) => {
     .then((users) => {
       if(users.length === 0) throw new Error('no Users');
       let user = users[0];
-      
+
       bcrypt.compare(password, user.password, function(err, valid) {
         if (valid) {
           user.password = '';
@@ -46,16 +46,18 @@ exports.createAccount = (req, res) => {
   var lessons = req.body.lessons || [];
   var favorites = req.body.favorites || [];
   var createdLessons = req.body.createdLessons || [];
+  var role = req.body.role || '';
 
   bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(password, salt, function(err, hash) {
       User.create({
-        username: username, 
+        username: username,
         password: hash,
-        lessons: lessons, 
-        favorites: favorites, 
+        lessons: lessons,
+        favorites: favorites,
         createdLessons: createdLessons,
-        email: email
+        email: email,
+        role: role
       })
       .then(function(result) {
         req.session.username = result.username;
@@ -68,7 +70,7 @@ exports.createAccount = (req, res) => {
       })
       .catch(function(err) {
         res.send(err);
-      })   
+      })
     });
   });
 }

@@ -22,41 +22,67 @@ class NavBar extends Component {
     this.props.queryDataBaseWithSearchInput(this.state.searchInput);
   }
 
-  render(props) {
+  render() {
     return (
-      <Navbar>
-        <Navbar.Form pullLeft>
-          <Form onSubmit={ (e) => {
-            e.preventDefault();
-            this.retrieveSearchInput.call(this, event);
-            this.props.history.push('/');
-          }}>
-            <FormGroup>
-              <FormControl type='text' placeholder='Enter a search term!' onChange={this.retrieveSearchInput.bind(this)}/>
-            </FormGroup>{' '}
-            <Link to='/'>
-              <Button type="submit" onClick={ (event) => {
-                this.handleSearchSubmit(event);
-                this.props.history.push('/');
-              }}>
-                Search
-              </Button>
-            </Link>{' '}
-          <span>
-          <Link to='/create'>
-            <Button>Create</Button>
-          </Link>{' '}
-          <Link to='/'>
-            <Button onClick={ this.props.getLessons }>Home</Button>
-          </Link>{' '}
-          <Link to='/user'>
-            <Button>Your Account</Button>
-          </Link>{' '}
-          <Button onClick={this.props.logout}>Logout</Button>{' '}
-        </span>
-        </Form>
-        </Navbar.Form>
-      </Navbar>
+      <div>
+      {
+        this.props.isLoggedIn ? (
+          this.props.userRole === 'teacher' ? (
+            <Navbar>
+              <Navbar.Form pullLeft>
+                <Form onSubmit={ (e) => {
+                  e.preventDefault();
+                  this.retrieveSearchInput.call(this, event);
+                  this.props.history.push('/');
+                }}>
+                  <FormGroup>
+                    <FormControl type='text' placeholder='Enter a search term!' onChange={this.retrieveSearchInput.bind(this)}/>
+                  </FormGroup>{' '}
+                  <Link to='/'>
+                    <Button type="submit" onClick={ (event) => {
+                      this.handleSearchSubmit(event);
+                      this.props.history.push('/');
+                    }}>
+                      Search
+                    </Button>
+                  </Link>{' '}
+                <span>
+                <Link to='/create'>
+                  <Button>Create</Button>
+                </Link>{' '}
+                <Link to='/'>
+                  <Button onClick={ this.props.getLessons }>Home</Button>
+                </Link>{' '}
+                <Link to='/user'>
+                  <Button>Your Account</Button>
+                </Link>{' '}
+                <Button onClick={this.props.logout}>Logout</Button>{' '}
+              </span>
+              </Form>
+              </Navbar.Form>
+            </Navbar>
+          ) : (
+
+            <Navbar>
+              <Navbar.Form pullLeft>
+                <Form onSubmit={ (e) => {
+                  e.preventDefault();
+                  this.retrieveSearchInput.call(this, event);
+                  this.props.history.push('/');
+                }}>
+                <span>
+                <Link to='/student'>
+                  <Button>Dashboard</Button>
+                </Link>{' '}
+                <Button onClick={this.props.logout}>Logout</Button>{' '}
+              </span>
+              </Form>
+              </Navbar.Form>
+            </Navbar>
+          )
+      ) : ''
+      }
+      </div>
     );
   }
 }
