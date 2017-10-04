@@ -47,6 +47,9 @@ class NavBar extends Component {
                     </Button>
                   </Link>{' '}
                 <span>
+                  <Link to='/lessons'>
+                    <Button>My Lessons</Button>
+                  </Link>{' '}
                 <Link to='/create'>
                   <Button>Create</Button>
                 </Link>{' '}
