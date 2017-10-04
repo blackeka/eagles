@@ -19,37 +19,66 @@ class Uploader extends React.Component {
     }
   }
 
+  keysToLowerCase(obj){
+    var key, keys = Object.keys(obj);
+    var n = keys.length;
+    var newobj = {};
+    while (n--) {
+      key = keys[n];
+      newobj[key.toLowerCase()] = obj[key];
+    }
+    return newobj
+  }
 
   handleFiles(files){
     var reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = (e) => {
       let result = reader.result
+      let commaCount = 0;
+      let newLineCount = 0;
+      result.split('').forEach(char => {
+        if (char === ','){
+          commaCount++
+        }
+        if (char === '\n'){
+          newLineCount++
+        }
+      });
+      if (commaCount / newLineCount !== 3){
+        alert('Too many columns, please ensure you have only the four required columns and no commas in cells')
+        return
+      }
+      let headers = ['quiz','text','youtubeurl','name']
       axios.post('/upload', {
         result:result
       })
-      .on((data) => {
-        console.log(data)
+      .then((data) => {
+        let result = data.data
+        result = result.map(row => {
+          return this.keysToLowerCase(row)
+        })
+        console.log(result)
+        let incorrectHeader = result.some(row => {
+          return Object.keys(row).map(header => header.trim()).some(header => headers.indexOf(header) === -1)
+        })
+        if (incorrectHeader){
+          alert('Incorrect Headers')
+          return
+        }
+        if (!result.every(row => row.name !== '')){
+          alert('Name of Slide Cannot be Blank')
+          return
+        }
+        if (!result.every(row => this.youTubeChecker(row.youtubeurl))){
+          alert('Incorrect YouTube URL input! Please revise Youtube URL input');
+          return
+        }
+        result.forEach((row) => {
+          this.props.editState(row.name, row.youtubeurl, row.text, row.quiz, this.props.submitSlide)
+        })
       })
-      // let headers = ['name','text','quiz','youtubeurl']
-      // result = result.split('\n').map(row => row.split(',')).filter(row => row.length !== 1);
-      //   //check for extra columns or commas in a cell
-      // if (result.some(row => row.length > 4)){
-      //   alert('Too many columns, please ensure you have only the four required columns and no commas in cells')
-      //   return
-      //   //check for correct headers
-      // } else if (result[0].map(values => values.toLowerCase().trim()).some(value => headers.indexOf(value) === -1)){
-      //   alert('Incorrect Column Headers')
-      //   return
-      // } else {
-      //
-      //   if (!obj.name.every(name => name !== '')){
-      //     alert('Name of Slide Cannot be Blank')
-      //     return
-      //   } else if (!obj.youtubeurl.every(youtubeurl => this.youTubeChecker(youtubeurl))){
-      //     alert('Incorrect YouTube URL input! Please revise Youtube URL input');
-      //     return
-      //   }
-      // }
+
+
     }
     reader.readAsText(files[0]);
   }

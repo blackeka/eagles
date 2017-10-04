@@ -43,6 +43,9 @@ app.use(express.static('../frontend/public'));
 app.get('/logout', checkAuth.logout);
 app.post('/users', checkAuth.createAccount);
 app.post('/login', checkAuth.attemptLoggin);
+
+
+app.use(checkAuth.checkUser);
 app.post('/upload', (req, res) => {
   let csvStr = req.body.result
   let result = []
@@ -56,7 +59,6 @@ app.post('/upload', (req, res) => {
     })
 })
 
-app.use(checkAuth.checkUser);
 
 // ------------------------------------------------ //
 

@@ -33,12 +33,15 @@ class SlideCreator extends React.Component {
     this.submitSlide()
   }
 
-  editState(name, youTubeUrl, text, quizUrlkey){
+  editState(name, youTubeUrl, text, quizUrl, callback){
+    console.log(youTubeUrl)
     this.setState({
       name,
       youTubeUrl,
-      quizUrlkey,
+      quizUrl,
       text
+    }, () => {
+      callback()
     })
   }
 
@@ -125,6 +128,7 @@ class SlideCreator extends React.Component {
   }
 
   youTubeQueryToServer(searchString, cb) {
+    console.log('seeaarch', searchString)
     fetch('/query?string=' + searchString, {
       method: "GET",
        headers: {
