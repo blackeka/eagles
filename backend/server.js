@@ -16,6 +16,7 @@ const app = express();
 const userRoutes = require('./routes/userRoutes');
 const lessonRoutes = require('./routes/lessonRoutes');
 const slideRoutes = require('./routes/slideRoutes');
+const classRoutes = require('./routes/classRoutes');
 const utilRoutes = require('./routes/utilRoutes');
 const checkAuth = require('./checkAuth');
 
@@ -54,6 +55,7 @@ app.all('/lessons/*', lessonRoutes);
 app.all('/lesson', lessonRoutes);
 app.all('/lesson/*', lessonRoutes);
 app.all('/query', utilRoutes);
+app.all('/classes', classRoutes);
 
 // redirect any uncaught routes
 app.use((req, res) => {

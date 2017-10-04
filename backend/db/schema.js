@@ -6,10 +6,15 @@ user,tutorial,lesson,slide
 stories: [{ type: Schema.Types.ObjectId, ref: 'Story' }]
 */
 
-
-
 const mongoose = require(`mongoose`);
 var Schema = mongoose.Schema;
+
+var classSchema = new Schema({
+  name: String,
+  teacher: String,
+  lessons: [String]
+})
+var Class = mongoose.model('Class', classSchema);
 
 var userSchema = new Schema({
   username: {type: String, required: true, unique: true},
@@ -18,7 +23,8 @@ var userSchema = new Schema({
   favorites: [String],
   createdLessons:[String],
   email: String,
-  role: String
+  role: String,
+  classes: [String]
 });
 var User = mongoose.model('User', userSchema);
 
@@ -51,5 +57,6 @@ let Slide = mongoose.model('Slide', slideSchema);
 module.exports = {
   User: User,
   Lesson: Lesson,
-  Slide: Slide
+  Slide: Slide,
+  Class: Class
 }
