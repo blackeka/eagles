@@ -52,10 +52,17 @@ class TeacherDashboard extends React.Component {
   render() {
     return (
       <div classID='teacherDashboardContainer'>
+<<<<<<< HEAD
         <h1> Welcome back, {this.props.username}!</h1><br></br>
         <div classID='teacherClasses'>
           <TeacherClasses classList={this.state.classList} teachername={this.props.username}/>
           <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button>
+=======
+        <h1> Welcome back, {this.props.username}!</h1>
+        <div classID='teacherClasses'>
+          <TeacherClasses classList={this.state.classList} teachername={this.props.username}/>
+          <button onClick={() => this.setState({ showCreateClassForm: true})}> Create Class! </button>
+>>>>>>> front end routes working again
           {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass}/> : ''}
         </div>
       </div>
