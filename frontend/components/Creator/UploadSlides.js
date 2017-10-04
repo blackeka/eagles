@@ -74,13 +74,65 @@ class Uploader extends React.Component {
           return
         }
         result.forEach((row) => {
-          this.props.editState(row.name, row.youtubeurl, row.text, row.quiz, this.props.submitSlide)
+          this.submitSlide(row)
         })
       })
-
-
     }
     reader.readAsText(files[0]);
+  }
+
+  submitSlide(obj){
+    if (obj.name !== '') {
+      if (obj.youtubeurl !== '') {
+        var sliceFrom = obj.youtubeurl.indexOf('=');
+        var youTubeUrl = obj.youtubeurl.slice(sliceFrom + 1);
+        this.props.youTubeQueryToServer(youTubeUrl, (youTubeDataObj) => {
+          let youTubeThumbnailUrl = youTubeDataObj.snippet.thumbnails.default.url;
+          let youTubeTags = youTubeDataObj.snippet.tags;
+          fetch('/slides', {
+            method: "POST",
+            body: JSON.stringify({
+              youTubeTags: youTubeTags,
+              youTubeThumbnailUrl: youTubeThumbnailUrl,
+              youTubeUrl: obj.youtubeurl,
+              name: obj.name,
+              lessonRef: this.props.lessonRef,
+              text: obj.text,
+              quizUrl: obj.quiz
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include"
+          })
+          .then((something) => something.json())
+          .then(result => {
+            this.props.fetch(result);
+          })
+        });
+      } else {
+        fetch('/slides', {
+          method: "POST",
+          body: JSON.stringify({
+            youTubeUrl: obj.youtubeurl,
+            name: obj.name,
+            lessonRef: this.props.lessonRef,
+            text: obj.text,
+            quizUrl: obj.quiz
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include"
+        })
+        .then((something) => something.json())
+        .then(result => {
+          this.props.fetch(result);
+        })
+      }
+    } else {
+        alert('Slide name required. Please enter a slide name.');
+    }
   }
 
   render(){

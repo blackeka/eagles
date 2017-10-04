@@ -226,7 +226,7 @@ class SlideCreator extends React.Component {
       );
     } else {
       return (
-        <Uploader editState={this.editState.bind(this)} uploadToggle={this.uploadToggle.bind(this)} submitSlide={this.submitSlide.bind(this)}/>
+        <Uploader lessonRef={this.state.lessonRef} youTubeQueryToServer={this.youTubeQueryToServer}  uploadToggle={this.uploadToggle.bind(this)} fetch={this.props.fetch}/>
       )
     }
   }
