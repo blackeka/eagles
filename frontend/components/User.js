@@ -53,18 +53,18 @@ class User extends Component {
             <DropdownButton title="Your Favorite Lessons:" id="Your Favorite Lesson">
               <MenuItem key={ this.props.user._id + 1 }>
                 { this.state.favoriteLessons.length === 0 ? 'You Have No Favorite Lessons!' :
-                  (this.state.favoriteLessons.map((lesson, i) => 
+                  (this.state.favoriteLessons.map((lesson, i) =>
                     <div key={ lesson._id }>
-                    Lesson Name: {lesson.name || 'Unnamed Lesson'} 
+                    Lesson Name: {lesson.name || 'Unnamed Lesson'}
                     <br/>
-                    Lesson Description: {lesson.description || 'no description'} 
+                    Lesson Description: {lesson.description || 'no description'}
                     <Link to={'/lesson/' + lesson._id}>
                       <Button bsStyle="primary" bsSize="small" block>View Lesson</Button>
                     </Link>
                     </div>
                   )
                 )}
-              </MenuItem> 
+              </MenuItem>
             </DropdownButton>
           </ButtonGroup>
         </ListGroupItem>
@@ -73,11 +73,11 @@ class User extends Component {
             <DropdownButton title="Your Lessons:" id="Your Lessons">
               <MenuItem key={ this.props.user._id }>
                 { this.state.lessons.length === 0 ? 'You Have No Lessons!' :
-                  (this.state.lessons.map((lesson, i) => 
+                  (this.state.lessons.map((lesson, i) =>
                     <div key={ lesson._id }>
                     Lesson Name: {lesson.name || 'Unnamed Lesson'}
                     <br/>
-                    Lesson Description: {lesson.description || 'no description'} 
+                    Lesson Description: {lesson.description || 'no description'}
                     <Link to={'/lesson/' + lesson._id}>
                       <Button bsStyle="primary" bsSize="small" block>View Lesson</Button>
                     </Link>
@@ -85,13 +85,13 @@ class User extends Component {
                     </div>
                   )
                 )}
-              </MenuItem> 
+              </MenuItem>
             </DropdownButton>
           </ButtonGroup>
         </ListGroupItem>
       </ListGroup>
     );
-  } 
+  }
 }
 
 export default User;

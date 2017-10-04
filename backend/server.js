@@ -42,6 +42,7 @@ app.get('/logout', checkAuth.logout);
 app.post('/users', checkAuth.createAccount);
 app.post('/login', checkAuth.attemptLoggin);
 app.use(checkAuth.checkUser);
+
 // ------------------------------------------------ //
 
 // handle protected routes

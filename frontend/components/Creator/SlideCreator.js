@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Uploader from './UploadSlides.js'
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 
 class SlideCreator extends React.Component {
@@ -13,7 +14,8 @@ class SlideCreator extends React.Component {
       text: props.slide.text || '',
       quizUrl: props.slide.quizUrl || '',
       old: props.slide.old || '',
-      lessonRef: props.lessonRef
+      lessonRef: props.lessonRef,
+      upload: false
     }
   }
   reset () {
@@ -23,11 +25,15 @@ class SlideCreator extends React.Component {
       youTubeThumbnailUrl: '',
       youTubeTags: '',
       text: '',
-      quizUrl: '',  
+      quizUrl: '',
     });
   }
   onSubmit (event) {
     event.preventDefault();
+    this.submitSlide()
+  }
+
+  submitSlide(){
     if (this.state.name !== '') {
       if (this.state.youTubeUrl !== '') {
         if (this.state.youTubeUrl.includes('https://www.youtube.com/watch?v=')) {
@@ -38,8 +44,6 @@ class SlideCreator extends React.Component {
               youTubeThumbnailUrl: youTubeDataObj.snippet.thumbnails.default.url,
               youTubeTags: youTubeDataObj.snippet.tags
             })
-            // youtubeDataObj.id;
-            // youTubeDataObj.snippet.title
             fetch('/slides', {
               method: "POST",
               body: JSON.stringify(this.state),
@@ -52,7 +56,7 @@ class SlideCreator extends React.Component {
             .then(result => {
               console.log(result, ' that was result this.state is', this.state);
               this.props.fetch(result);
-              this.reset();  
+              this.reset();
             })
           });
         } else {
@@ -93,7 +97,7 @@ class SlideCreator extends React.Component {
         "Content-Type": "application/json",
       },
       credentials: "include"
-    })    
+    })
     .then(function(result) {
       return result.json();
     })
@@ -102,6 +106,12 @@ class SlideCreator extends React.Component {
     })
     .catch(function(err) {
       console.log('line 114 err', err);
+    })
+  }
+
+  uploadToggle () {
+    this.setState({
+      upload: !this.state.upload
     })
   }
 
@@ -124,74 +134,88 @@ class SlideCreator extends React.Component {
   }
 
   render () {
-    return (
-      <Form horizontal onSubmit={this.onSubmit.bind(this)}>
-        <FormGroup>
-          <div className='slideCreator'>
-            <ControlLabel>Slide Creator</ControlLabel>
-          </div>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>Slide Name</Col>
-          <Col sm={10}>
-            <FormControl type='text' placeholder='Slide Name'
-              value={this.state.name}
-              onChange={(event) => this.setState({name: event.target.value})}
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>Slide youTubeUrl</Col>
-          <Col sm={10}>
-            <FormControl type='text' placeholder='Slide youTube Url'
-              value={this.state.youTubeUrl}
-              onChange={(event) => this.setState({youTubeUrl: event.target.value})}
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>Slide Text</Col>
-          <Col sm={10}>
-            <FormControl type='text' placeholder='Slide Text'
-              value={this.state.text}
-              onChange={(event) => this.setState({text: event.target.value})}
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>Slide QuizUrl</Col>
-          <Col sm={10}>
-            <FormControl type='Quiz Url' placeholder='Quiz Url'
-              value={this.state.quizUrl}
-              onChange={(event) => this.setState({quizUrl: event.target.value})}
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col smOffset={2} sm={2}>
-            { this.state.old === '' ? 
-              (<Button type="submit" bsStyle="primary" bsSize="small">Create The Slide</Button>) : 
-              (<Button onClick={this.updateOldSlide.bind(this)} bsStyle="primary" bsSize="small">
-                Update Slide
-              </Button>) 
-            }
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col smOffset={2} sm={2}>
-            { this.state.old === '' ? 
-              (<Button onClick={this.props.changeCreateState} bsStyle="warning" bsSize="small">
-                Go Back
-              </Button>)
-              :
-              (<Button onClick={this.props.changeEditingOldSlide} bsStyle="warning" bsSize="small">
-                Finish Update
-              </Button>)
-            }
-          </Col>
-        </FormGroup>
-      </Form>
-    );
+    if (!this.state.upload){
+      return (
+        <Form horizontal onSubmit={this.onSubmit.bind(this)}>
+          <FormGroup>
+            <div className='slideCreator'>
+              <ControlLabel>Slide Creator</ControlLabel>
+            </div>
+          </FormGroup>
+          <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>Slide Name</Col>
+            <Col sm={10}>
+              <FormControl type='text' placeholder='Slide Name'
+                value={this.state.name}
+                onChange={(event) => this.setState({name: event.target.value})}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>Slide youTubeUrl</Col>
+            <Col sm={10}>
+              <FormControl type='text' placeholder='Slide youTube Url'
+                value={this.state.youTubeUrl}
+                onChange={(event) => this.setState({youTubeUrl: event.target.value})}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>Slide Text</Col>
+            <Col sm={10}>
+              <FormControl type='text' placeholder='Slide Text'
+                value={this.state.text}
+                onChange={(event) => this.setState({text: event.target.value})}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>Slide QuizUrl</Col>
+            <Col sm={10}>
+              <FormControl type='Quiz Url' placeholder='Quiz Url'
+                value={this.state.quizUrl}
+                onChange={(event) => this.setState({quizUrl: event.target.value})}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col smOffset={2} sm={2}>
+              { this.state.old === '' ?
+                (<Button type="submit" bsStyle="primary" bsSize="small">Create The Slide</Button>) :
+                (<Button onClick={this.updateOldSlide.bind(this)} bsStyle="primary" bsSize="small">
+                  Update Slide
+                </Button>)
+              }
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col smOffset={2} sm={2}>
+              { this.state.old === '' ?
+                (<Button onClick={this.uploadToggle.bind(this)} bsStyle="primary" bsSize="small">Upload Slides Via CSV</Button>) :
+                null
+              }
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col smOffset={2} sm={2}>
+              { this.state.old === '' ?
+                (<Button onClick={this.props.changeCreateState} bsStyle="warning" bsSize="small">
+                  Go Back
+                </Button>)
+                :
+                (<Button onClick={this.props.changeEditingOldSlide} bsStyle="warning" bsSize="small">
+                  Finish Update
+                </Button>)
+              }
+            </Col>
+          </FormGroup>
+        </Form>
+      );
+    } else {
+      return (
+        <Uploader uploadToggle={this.uploadToggle.bind(this)}/>
+      )
+    }
   }
 
 }
