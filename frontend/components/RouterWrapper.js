@@ -171,6 +171,16 @@ class RouterWrapper extends Component {
             <Route exact path='/lessons'
               render={() => (
                 <LessonPreviewContainer
+                  lessons= { this.state.lessons.filter((lsn) => lsn.userRef === this.state.user._id) }
+                  organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
+                  getLessons={ this.getLessons }
+                  teacherId={this.state.user._id}
+                />
+              )}
+            />
+          <Route exact path='/search'
+              render={() => (
+                <LessonPreviewContainer
                   lessons= { this.state.lessons }
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }

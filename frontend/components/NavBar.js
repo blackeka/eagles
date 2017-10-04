@@ -18,7 +18,7 @@ class NavBar extends Component {
   }
 
   handleSearchSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.queryDataBaseWithSearchInput(this.state.searchInput);
   }
 
@@ -39,7 +39,7 @@ class NavBar extends Component {
                     <FormControl type='text' placeholder='Search lessons' onChange={this.retrieveSearchInput.bind(this)}/>
                   </FormGroup>{' '}
                   <Link to='/search'>
-                    <Button type="submit" onClick={ (event) => {
+                    <Button onClick={ (event) => {
                       this.handleSearchSubmit(event);
                       this.props.history.push('/');
                     }}>
