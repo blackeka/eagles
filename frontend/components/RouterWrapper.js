@@ -203,9 +203,11 @@ class RouterWrapper extends Component {
           </Switch>)
          : //student routes
          (<Switch>
-            <Route exact path='/student'
+            <Route exact path='/'
               render={() => (
-                <StudentDashboard />
+                <StudentDashboard
+                  studentname={this.state.user.username}
+                  />
               )}
             />
             <Route path='/lesson/:id'

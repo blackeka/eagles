@@ -36,9 +36,9 @@ class NavBar extends Component {
                   this.props.history.push('/');
                 }}>
                   <FormGroup>
-                    <FormControl type='text' placeholder='Enter a search term!' onChange={this.retrieveSearchInput.bind(this)}/>
+                    <FormControl type='text' placeholder='Search lessons' onChange={this.retrieveSearchInput.bind(this)}/>
                   </FormGroup>{' '}
-                  <Link to='/'>
+                  <Link to='/search'>
                     <Button type="submit" onClick={ (event) => {
                       this.handleSearchSubmit(event);
                       this.props.history.push('/');
@@ -47,17 +47,17 @@ class NavBar extends Component {
                     </Button>
                   </Link>{' '}
                 <span>
+                  <Link to='/'>
+                    <Button onClick={ this.props.getLessons }>Home</Button>
+                  </Link>{' '}
                   <Link to='/lessons'>
                     <Button>My Lessons</Button>
                   </Link>{' '}
                 <Link to='/create'>
                   <Button>Create</Button>
                 </Link>{' '}
-                <Link to='/'>
-                  <Button onClick={ this.props.getLessons }>Home</Button>
-                </Link>{' '}
                 <Link to='/user'>
-                  <Button>Your Account</Button>
+                  <Button>Account</Button>
                 </Link>{' '}
                 <Button onClick={this.props.logout}>Logout</Button>{' '}
               </span>
@@ -74,7 +74,7 @@ class NavBar extends Component {
                   this.props.history.push('/');
                 }}>
                 <span>
-                <Link to='/student'>
+                <Link to='/'>
                   <Button>Dashboard</Button>
                 </Link>{' '}
                 <Button onClick={this.props.logout}>Logout</Button>{' '}
