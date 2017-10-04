@@ -174,6 +174,7 @@ class RouterWrapper extends Component {
                   lessons= { this.state.lessons }
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }
+                  teacherId={this.state.user._id}
                 />
               )}
             />
