@@ -52,7 +52,7 @@ class RouterWrapper extends Component {
     .then((results) => {
       var filteredLessons = this.state.lessons.filter((lesson) => {
         var lowerSearchInput = searchInput.toLowerCase();
-        if (lesson.keyWords.includes(lowerSearchInput) || lowerSearchInput === '') {
+        if (lesson.keyWords.includes(lowerSearchInput) || lesson.name.toLowerCase().includes(lowerSearchInput) || lesson.description.toLowerCase().includes(lowerSearchInput) || lowerSearchInput === '') {
           return lesson;
         }
       });
