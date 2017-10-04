@@ -19,6 +19,7 @@ class StudentDashboard extends React.Component {
   render() {
     return (
       <div classID='studentdashboard'>
+        <h2> Welcome back, {this.props.studentname} </h2>
         <input type='text' onChange={this.handleLinkChange} placeholder='Enter lesson link'></input>
         <div classID='pastlessons'>
           <p> Results from past lessons: </p>
