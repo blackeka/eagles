@@ -4,8 +4,8 @@ const SingleClass = (props) => {
 
   return (
     <div className='classContainer'>
-      <h3> Class name: "{props.selectedClass.name}" </h3>
-      <p> Lessons: {props.selectedClass.lessons} </p>
+      <h3> Class name: "{props.selectedClass.name || ''}" </h3>
+      <p> Lessons: {props.selectedClass.lessons || ''} </p>
       <p> Students: </p>
       <div classID='studentsenrolled'>
         <ol>

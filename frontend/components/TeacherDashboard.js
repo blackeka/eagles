@@ -27,10 +27,10 @@ class TeacherDashboard extends React.Component {
     .then( (res) => res.json())
     .then((JSONresponse) => {
       console.log('response from classes endpoint', JSONresponse)
+      var teachersClasses = JSONresponse.filter((clas) => clas.teacher === this.props.username)
       this.setState({
-        classList: JSONresponse,
-        selectedClassName: JSONresponse[0].name,
-        selectedClassObj: JSONresponse[0]
+        classList: teachersClasses,
+        selectedClassName: teachersClasses[0].name
       }, () => console.log('state after mount', this.state))
     })
     .then( () => {
@@ -38,12 +38,14 @@ class TeacherDashboard extends React.Component {
         return fetch('/users', { method: 'GET', credentials: "include"})
         .then( (response) => response.json())
         .then( (allUsers) => {
-          var studentList = allUsers.filter((user) => user.classes.includes(klass._id));
-          klass.students = studentList;
+          var studentList = allUsers.filter((user) => user.classes.includes(klass._id) || user.classes.includes(klass.name));
+          console.log('student list for class', studentList)
+          klass['students'] = studentList;
           var newClassListWithStudents = this.state.classListWithStudents;
           newClassListWithStudents.push(klass);
           this.setState({
-            classListWithStudents: newClassListWithStudents
+            classListWithStudents: newClassListWithStudents,
+            selectedClassObj: newClassListWithStudents[0]
           })
         })
       })

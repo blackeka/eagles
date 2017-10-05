@@ -56,6 +56,9 @@ class NavBar extends Component {
                 <Link to='/create'>
                   <Button>Create</Button>
                 </Link>{' '}
+                <Link to='/applications'>
+                  <Button>Applications</Button>
+                </Link>{' '}
                 <Link to='/user'>
                   <Button>Account</Button>
                 </Link>{' '}

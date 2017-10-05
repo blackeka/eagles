@@ -8,10 +8,13 @@ class BrowseClasses extends React.Component {
     this.state = {
       classList: [],
       selectedClass: {},
-      showApplication: false
+      showApplication: false,
+      applicationText: ''
     }
     //bindings
     this.handleClassSelect = this.handleClassSelect.bind(this);
+    this.applicationTextCb = this.applicationTextCb.bind(this);
+    this.closeApp = this.closeApp.bind(this);
   }
   //functions
 
@@ -36,6 +39,19 @@ class BrowseClasses extends React.Component {
       selectedClass: classObj,
       showApplication: true
     })
+  };
+
+  applicationTextCb(text) {
+    this.setState({
+      applicationText: text
+    })
+  }
+
+  closeApp() {
+    this.setState({
+      applicationText: '',
+      showApplication: false
+    })
   }
 
   render() {
@@ -50,7 +66,9 @@ class BrowseClasses extends React.Component {
         ))}
         <br></br>
         {this.state.showApplication ?
-          <ApplyToClass classObj={this.state.selectedClass} userID={this.props.studentID}/>
+          <ApplyToClass classObj={this.state.selectedClass} studentname={this.props.studentname}
+                        applicationTextCb={this.applicationTextCb} appText={this.state.applicationText}
+                        hideApplicationCb={this.closeApp}/>
         : ''}
 
       </div>
