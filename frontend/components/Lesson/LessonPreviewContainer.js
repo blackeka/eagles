@@ -19,7 +19,7 @@ class LessonPreviewContainer extends Component {
         <Button bsStyle="primary" bsSize="small" onClick={this.props.organizeSearchResultsBasedOnMostLikes} >by Likes</Button>
         <Button bsStyle="primary" bsSize="small" >by Date</Button>
         <ListGroup>
-        {this.props.lessons.filter((lsn) => lsn.userRef === this.props.teacherId).map((lesson, i) => 
+        {this.props.lessons.map((lesson, i) => 
           <LessonPreview
             lesson={lesson}
             index={i}
