@@ -8,6 +8,7 @@ import User from './User';
 import Login from './Auth/Login';
 import StudentDashboard from './StudentDashboard';
 import TeacherDashboard from './TeacherDashboard';
+import BrowseClasses from './Subcomponents/StudentBrowseClasses';
 
 class RouterWrapper extends Component {
   constructor(props) {
@@ -214,6 +215,13 @@ class RouterWrapper extends Component {
             <Route exact path='/'
               render={() => (
                 <StudentDashboard
+                  studentname={this.state.user.username}
+                  />
+              )}
+            />
+          <Route exact path='/browse'
+              render={() => (
+                <BrowseClasses
                   studentname={this.state.user.username}
                   />
               )}

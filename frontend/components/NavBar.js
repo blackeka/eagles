@@ -77,6 +77,9 @@ class NavBar extends Component {
                 <Link to='/'>
                   <Button>Dashboard</Button>
                 </Link>{' '}
+                <Link to='/browse'>
+                  <Button>Browse</Button>
+                </Link>{' '}
                 <Button onClick={this.props.logout}>Logout</Button>{' '}
               </span>
               </Form>
