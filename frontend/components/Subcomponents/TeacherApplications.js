@@ -9,6 +9,7 @@ class TeacherApplications extends React.Component {
       selectedApp: {},
     }
     this.approveStudent = this.approveStudent.bind(this);
+    this.rejectStudent = this.rejectStudent.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +23,31 @@ class TeacherApplications extends React.Component {
     })
   };
 
+  rejectStudent(e) {
+    var desired = $(e.target).parent().children();
+    let student = desired[0].innerText.slice(14);
+    let klass = desired[1].innerText.slice(7);
+    let approveObj = {
+      student: student,
+      class: klass,
+      status: false
+    }
+    return fetch('/applications', {
+      method: "PUT",
+      body: JSON.stringify(approveObj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include"
+    })
+    .then( () => {
+      var editedAppList = this.state.appList.filter((app) => !(app.student === student && app.class === klass));
+      this.setState({
+        appList: editedAppList
+      })
+    })
+  }
+
   approveStudent(e) {
 
       var desired = $(e.target).parent().children();
@@ -29,7 +55,8 @@ class TeacherApplications extends React.Component {
       let klass = desired[1].innerText.slice(7);
       let approveObj = {
         student: student,
-        class: klass
+        class: klass,
+        statue: true
       }
 
       return fetch('/applications', {
@@ -50,7 +77,7 @@ class TeacherApplications extends React.Component {
           credentials: "include"
         })
         .then( () => {
-          var editedAppList = this.state.appList.filter((app) => app.student !== student);
+          var editedAppList = this.state.appList.filter((app) => !(app.student === student && app.class === klass));
           this.setState({
             appList: editedAppList
           })
@@ -67,8 +94,9 @@ class TeacherApplications extends React.Component {
           <div className='singleApp' key={i} style={appStyle}>
             <p> Student name: {app.student} </p>
             <p> Class: {app.class} </p>
-            <p> Application: {app.reason} </p>
+            <p> Reason: {app.reason} </p>
             <button onClick={this.approveStudent}> Approve </button>
+            <button onClick={this.rejectStudent}> Reject </button>
           </div>
         )) : ''}
 

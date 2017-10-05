@@ -34,7 +34,7 @@ router.put('/applications', (req, res) => {
     class: req.body.class
   })
   .then( (result) => {
-    result.status = true;
+    result.status = req.body.status;
     console.log('application', result)
     result.save();
     res.send('Application has been approved by teacher!')

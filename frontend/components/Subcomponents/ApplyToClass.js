@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 const ApplyToClass = (props) => {
 
@@ -23,14 +24,13 @@ const ApplyToClass = (props) => {
       },
       credentials: "include"
     })
-    .then((anything) => console.log('application sent successfully!'));
   }
 
     return (
-      <div classID='apply'>
+      <div className='apply'>
         <h4> Why do you want to join this class? What do you hope to gain from it?</h4>
         <textarea onChange={handleTextChange}></textarea><br></br>
-        <button onClick={sendApplication}> Apply to {props.classObj.name}</button>
+        <button className='appsubmit' onClick={sendApplication}> Apply to {props.classObj.name}</button>
       </div>
     )
 
