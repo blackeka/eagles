@@ -8,7 +8,7 @@ class Question extends React.Component {
     this.state = {
       question: '',
       shortAnswer: '',
-      mcAnswers: [1, 2, 3],
+      mcAnswers: [],
       relatedSlides: [],
       currentQindex: 0,
       mcType: false,
@@ -85,7 +85,7 @@ class Question extends React.Component {
 
   saveAnswer(e) {
     // e.preventDefault()
-        console.log('save answer', e,  'hi', this)
+        console.log('save answer', e,  'hi')
     let temp = this.state.mcAnswers;
     temp.push(e)
     console.log(temp)
@@ -109,7 +109,8 @@ class Question extends React.Component {
     console.log(e.target.value)
 
     this.state.mcAnswers.map((answer, index) => {
-      if(index !== e.target.value) {
+      console.log(`map ${index}`)
+      if(answer !== e.target.value) {
         console.log('hi')
         temp.push(answer);
       }
@@ -161,12 +162,9 @@ class Question extends React.Component {
                 return (
                   <div key={answer + i}>
                     <MultipleChoice type={this.state.mcType} key={i} index={i} value={answer} answerChange={this.saveAnswer} deleteOption={this.deleteOption}/>
-                    <Button key={answer} value={i} onClick={this.deleteOption}>-</Button>
                   </div>
                 )
               }) }
-              {' '}
-              <Button onClick={this.addOption}>+</Button>
             </div>
           }
           <Button onClick={this.noMultipleChoice} > None </Button>
@@ -177,7 +175,7 @@ class Question extends React.Component {
             <FormControl 
               type="text" 
               placeholder="What are the related slides" 
-              value={this.state.relatedSlides}
+
               onChange={this.relatedSlideChange}
             />
           </FormGroup>
@@ -188,3 +186,6 @@ class Question extends React.Component {
 }
 
 export default Question;
+
+//  <Button key={answer} value={answer} onClick={this.deleteOption}>-</Button> 
+// <Button onClick={this.addOption}>+</Button>

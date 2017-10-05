@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Uploader from './UploadSlides.js'
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class SlideCreator extends React.Component {
   constructor (props) {
@@ -220,6 +221,7 @@ class SlideCreator extends React.Component {
                   Finish Update
                 </Button>)
               }
+              <Link to="/quiz"><Button>Create Quiz</Button></Link>
             </Col>
           </FormGroup>
         </Form>

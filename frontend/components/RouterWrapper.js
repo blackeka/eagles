@@ -8,6 +8,7 @@ import User from './User';
 import Login from './Auth/Login';
 import StudentDashboard from './StudentDashboard';
 import TeacherDashboard from './TeacherDashboard';
+import Quiz from './Creator/QuizCreator.js';
 
 class RouterWrapper extends Component {
   constructor(props) {
@@ -189,6 +190,7 @@ class RouterWrapper extends Component {
                 />
               )}
             />
+            <Route path='/quiz' component={ Quiz } />
             <Route path='/user' render={ () =>
                 <User
                   user={ this.state.user }
