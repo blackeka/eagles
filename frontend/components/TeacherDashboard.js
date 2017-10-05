@@ -8,7 +8,8 @@ class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      classList: [{name: 'placeholder', students: ['a', 'b']}],
+      classList: [{name: 'placeholder'}],
+      classListWithStudents: [],
       studentList: [],
       lessonList: [],
       showCreateClassForm: false,
@@ -32,11 +33,21 @@ class TeacherDashboard extends React.Component {
         selectedClassObj: JSONresponse[0]
       }, () => console.log('state after mount', this.state))
     })
-    // .then( () => {
-    //   this.state.classList.forEach((klass) => {
-    //
-    //   })
-    // })
+    .then( () => {
+      this.state.classList.forEach((klass) => {
+        return fetch('/users', { method: 'GET', credentials: "include"})
+        .then( (response) => response.json())
+        .then( (allUsers) => {
+          var studentList = allUsers.filter((user) => user.classes.includes(klass._id));
+          klass.students = studentList;
+          var newClassListWithStudents = this.state.classListWithStudents;
+          newClassListWithStudents.push(klass);
+          this.setState({
+            classListWithStudents: newClassListWithStudents
+          })
+        })
+      })
+    })
   }
 
   createNewClass(classObj) {
@@ -61,15 +72,11 @@ class TeacherDashboard extends React.Component {
 
   selectClass(selClass) {
 
-    return fetch('/classes', { method: 'GET', credentials: "include" })
-    .then( (res) => res.json())
-    .then((JSONresponse) => {
-      var selClassObj = JSONresponse.filter((cobj) => cobj.name === selClass)[0];
+    var selClassObj = this.state.classListWithStudents.filter((klass) => klass.name === selClass)[0];
       this.setState({
         selectedClassName: selClass,
         selectedClassObj: selClassObj
-      }, () => console.log('class selected', this.state))
-    })
+      }, () => console.log('selected class', this.state.selectedClassObj))
   }
 
 
