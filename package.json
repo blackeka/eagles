@@ -35,12 +35,9 @@
     "csvtojson": "^1.1.8",
     "dotenv": "^4.0.0",
     "express-session": "^1.15.5",
-<<<<<<< HEAD
     "googleapis": "^22.2.0",
     "lodash": "^4.17.4",
-=======
     "jquery": "^3.2.1",
->>>>>>> roles
     "mongoose": "^4.11.12",
     "morgan": "^1.8.2",
     "nodemailer": "^4.1.0",
