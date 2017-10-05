@@ -201,7 +201,7 @@ class LessonCreator extends React.Component {
           { this.state.lessonid === 'No ID Yet' ? (<FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Lesson Name</Col>
             <Col sm={10}>
-              <FormControl type='text' placeholder='Lesson Name'
+              <FormControl className='lesson-name' type='text' placeholder='Lesson Name'
                 value={this.state.name}
                 onChange={this.changeName.bind(this)}
               />
@@ -211,7 +211,7 @@ class LessonCreator extends React.Component {
           { this.state.lessonid === 'No ID Yet' ? (<FormGroup>
             <Col componentClass={ControlLabel} sm={2}>Lesson description</Col>
             <Col sm={10}>
-              <FormControl type='text' placeholder='Lesson Description'
+              <FormControl type='text' className='lesson-description' placeholder='Lesson Description'
                 value={this.state.description}
                 onChange={this.changeDescription.bind(this)}
               />
@@ -298,6 +298,7 @@ class LessonCreator extends React.Component {
           <SlideCreator
             slide={{}}
             lessonRef={this.state.lessonid}
+            username={this.props.username}
             fetch={this.fetchSlideFromSlideCreator.bind(this)}
             changeCreateState={this.changeCreateState.bind(this)}
             changeEditingOldSlide={this.changeEditingOldSlide.bind(this)}>
