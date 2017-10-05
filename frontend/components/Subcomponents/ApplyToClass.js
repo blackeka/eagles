@@ -2,23 +2,20 @@ import React from 'react';
 
 const ApplyToClass = (props) => {
 
-  const sendApplication = (props) => {
-    // fetch('/classes', {
-    //   method: "PUT",
-    //   body: JSON.stringify(lessonObj),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include"
-    // })
-    // .then((anything) => anything.json())
-    // .then((result) => {
-    //   console.log('result is',result);
-    //   this.setState({
-    //     lessonid: result._id // setting lessonid to the lesson object's id
-    //   })
-    //   console.log('state now is ', this.state);
-    // })
+  const sendApplication = () => {
+    var application = {
+      classID: props.classObj._id,
+      userID: props.userID
+    }
+    return fetch('/classes', {
+      method: "PUT",
+      body: JSON.stringify(application),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include"
+    })
+    .then((anything) => console.log('application sent successfully!'));
   }
 
     return (

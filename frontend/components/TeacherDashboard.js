@@ -32,6 +32,11 @@ class TeacherDashboard extends React.Component {
         selectedClassObj: JSONresponse[0]
       }, () => console.log('state after mount', this.state))
     })
+    // .then( () => {
+    //   this.state.classList.forEach((klass) => {
+    //
+    //   })
+    // })
   }
 
   createNewClass(classObj) {

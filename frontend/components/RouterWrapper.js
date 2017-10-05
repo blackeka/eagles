@@ -223,6 +223,7 @@ class RouterWrapper extends Component {
               render={() => (
                 <BrowseClasses
                   studentname={this.state.user.username}
+                  studentID={this.state.user._id}
                   />
               )}
             />

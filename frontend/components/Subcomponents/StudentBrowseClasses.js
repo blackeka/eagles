@@ -50,7 +50,7 @@ class BrowseClasses extends React.Component {
         ))}
         <br></br>
         {this.state.showApplication ?
-          <ApplyToClass classObj={this.state.selectedClass} />
+          <ApplyToClass classObj={this.state.selectedClass} userID={this.props.studentID}/>
         : ''}
 
       </div>

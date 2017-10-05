@@ -25,4 +25,17 @@ router.get('/classes', (req, res) => {
   .catch( (err) => res.send(err))
 });
 
+router.put('/classes', (req, res) => {
+  User.findOne({
+    _id: req.body.userID
+  })
+  .then( (result) => {
+    console.log('result from put', result)
+    result.classes.push(req.body.classID)
+    console.log('updated class array', result.classes)
+    result.save();
+    res.send('user is now in class! or rather, class is now in user')
+  })
+})
+
 module.exports = router;
