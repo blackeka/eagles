@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from './NavBar';
-import Notifications from './NotificationCenter'
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class App extends Component {
           userRole = {this.props.userRole}
           isLoggedIn = {this.props.isLoggedIn}
         />
-      <Notifications />
         { this.props.children || 'no children!' }
       </div>
     );

@@ -4,7 +4,7 @@
   "description": "Greenfield Project",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node ./backend/server.js",
+    "start": "webpack -w",
     "compile": "webpack --watch"
   },
   "repository": {
