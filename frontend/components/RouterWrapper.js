@@ -8,6 +8,7 @@ import User from './User';
 import Login from './Auth/Login';
 import StudentDashboard from './StudentDashboard';
 import TeacherDashboard from './TeacherDashboard';
+import BrowseClasses from './Subcomponents/StudentBrowseClasses';
 
 class RouterWrapper extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class RouterWrapper extends Component {
     .then((results) => {
       var filteredLessons = this.state.lessons.filter((lesson) => {
         var lowerSearchInput = searchInput.toLowerCase();
-        if (lesson.keyWords.includes(lowerSearchInput) || lowerSearchInput === '') {
+        if (lesson.keyWords.includes(lowerSearchInput) || lesson.name.toLowerCase().includes(lowerSearchInput) || lesson.description.toLowerCase().includes(lowerSearchInput) || lowerSearchInput === '') {
           return lesson;
         }
       });
@@ -171,6 +172,16 @@ class RouterWrapper extends Component {
             <Route exact path='/lessons'
               render={() => (
                 <LessonPreviewContainer
+                  lessons= { this.state.lessons.filter((lsn) => lsn.userRef === this.state.user._id) }
+                  organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
+                  getLessons={ this.getLessons }
+                  teacherId={this.state.user._id}
+                />
+              )}
+            />
+          <Route exact path='/search'
+              render={() => (
+                <LessonPreviewContainer
                   lessons= { this.state.lessons }
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }
@@ -178,9 +189,17 @@ class RouterWrapper extends Component {
                 />
               )}
             />
-            <Route path='/lesson/:id'
-              render={ ()=> ( component={ Lesson } ) }
+          <Route exact path='/search'
+              render={() => (
+                <LessonPreviewContainer
+                  lessons= { this.state.lessons }
+                  organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
+                  getLessons={ this.getLessons }
+                  teacherId={this.state.user._id}
+                />
+              )}
             />
+            <Route path='/lesson/:id' component={ Lesson } />
             <Route path='/create'
               render={ () => (
                 <LessonCreator
@@ -207,6 +226,14 @@ class RouterWrapper extends Component {
               render={() => (
                 <StudentDashboard
                   studentname={this.state.user.username}
+                  />
+              )}
+            />
+          <Route exact path='/browse'
+              render={() => (
+                <BrowseClasses
+                  studentname={this.state.user.username}
+                  studentID={this.state.user._id}
                   />
               )}
             />
