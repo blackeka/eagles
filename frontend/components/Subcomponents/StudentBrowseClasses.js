@@ -8,10 +8,13 @@ class BrowseClasses extends React.Component {
     this.state = {
       classList: [],
       selectedClass: {},
-      showApplication: false
+      showApplication: false,
+      applicationText: ''
     }
     //bindings
     this.handleClassSelect = this.handleClassSelect.bind(this);
+    this.applicationTextCb = this.applicationTextCb.bind(this);
+    this.closeApp = this.closeApp.bind(this);
   }
   //functions
 
@@ -36,6 +39,22 @@ class BrowseClasses extends React.Component {
       selectedClass: classObj,
       showApplication: true
     })
+  };
+
+  applicationTextCb(text) {
+    this.setState({
+      applicationText: text
+    })
+  }
+
+  closeApp() {
+    this.setState({
+      applicationText: '',
+      showApplication: false
+    })
+    var alertMessage = `<p id='appSentMsg'> Your application was sent to the instructor, ${this.state.selectedClass.teacher}; you will get a notification when they decide if you can enroll in the class! [Click to hide this message]</p>`
+    $('.successMessage').append(alertMessage);
+    $('#appSentMsg').click(() => $('#appSentMsg').remove())
   }
 
   render() {
@@ -50,8 +69,11 @@ class BrowseClasses extends React.Component {
         ))}
         <br></br>
         {this.state.showApplication ?
-          <ApplyToClass classObj={this.state.selectedClass} userID={this.props.studentID}/>
+          <ApplyToClass classObj={this.state.selectedClass} studentname={this.props.studentname}
+                        applicationTextCb={this.applicationTextCb} appText={this.state.applicationText}
+                        hideApplicationCb={this.closeApp}/>
         : ''}
+        <div className='successMessage'></div>
 
       </div>
     )

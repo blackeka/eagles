@@ -10,6 +10,7 @@ import StudentDashboard from './StudentDashboard';
 import TeacherDashboard from './TeacherDashboard';
 import Quiz from './Creator/QuizCreator.js';
 import BrowseClasses from './Subcomponents/StudentBrowseClasses';
+import TeacherApplications from './Subcomponents/TeacherApplications';
 
 class RouterWrapper extends Component {
   constructor(props) {
@@ -214,6 +215,12 @@ class RouterWrapper extends Component {
                 <User
                   user={ this.state.user }
                   getLessons={ this.getLessons }
+                />
+              }
+            />
+          <Route path='/applications' render={ () =>
+                <TeacherApplications
+                  teachername={this.state.user.username}
                 />
               }
             />

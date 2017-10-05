@@ -16,6 +16,15 @@ var classSchema = new Schema({
 })
 var Class = mongoose.model('Class', classSchema);
 
+var applicationSchema = new Schema({
+  class: String,
+  teacher: String,
+  student: String,
+  reason: String,
+  status: Boolean
+})
+var Application = mongoose.model('Application', applicationSchema);
+
 var userSchema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
@@ -58,5 +67,6 @@ module.exports = {
   User: User,
   Lesson: Lesson,
   Slide: Slide,
-  Class: Class
+  Class: Class,
+  Application: Application
 }
