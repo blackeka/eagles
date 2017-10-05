@@ -5,16 +5,8 @@ class MultipleChoice extends React.Component  {
   constructor(props) {
     super(props);
     this.state = {
-      answer: ''
+      answer: '',
     }
-  }
-
-  handleAnswerChange() {
-    this.setState({
-      answer: e.target.value
-    }, () => {
-      this.props.answerChange(this.state.answer);
-    })
   }
 
   render () {
@@ -27,26 +19,29 @@ class MultipleChoice extends React.Component  {
             {' '}
             <FormControl 
               type="text" 
-              placeholder="Enter multiple choice answer" 
-              defaultValue={this.props.value}
-              onChange={handleAnswerChange}
+              placeholder="Enter multiple choice answer"
+              inputRef={(FormControl) => this.answer = FormControl} 
             />
+            <Button onClick={e => this.props.answerChange.call(e)}  type="submit">Save Answer</Button>
           </FormGroup>
-          <Button value={this.props.value} onClick={(e, value) => console.log() }>X</Button>
+          
         </Checkbox>) : 
-        (<Radio>
+        (
+          <Form>
+          <Radio>
           <FormGroup controlId="formControlsCheckboxes">
             <ControlLabel>Answer Choice</ControlLabel>
             {' '}
             <FormControl 
               type="text" 
               placeholder="Enter multiple choice answer" 
-              defaultValue={this.state.value}
-              onChange={handleAnswerChange}
+              inputRef={(input) => this.answer = input} 
             />
             </FormGroup>
-            <Button onClick={(e, value) => this.props.deleteOption(e, value)}>X</Button>
-        </Radio>)
+            <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
+        </Radio>
+        </Form>
+        )
       }
       </div>
     )

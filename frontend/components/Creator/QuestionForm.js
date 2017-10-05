@@ -25,6 +25,7 @@ class Question extends React.Component {
     this.noMultipleChoice = this.noMultipleChoice.bind(this);
     this.addOption = this.addOption.bind(this);
     this.deleteOption = this.deleteOption.bind(this);
+    this.saveAnswer = this.saveAnswer.bind(this);
   }
 
   questionChange(e) {
@@ -82,31 +83,38 @@ class Question extends React.Component {
     });
   }
 
-  saveAnswer() {
-
+  saveAnswer(e) {
+    // e.preventDefault()
+        console.log('save answer', e,  'hi', this)
+    let temp = this.state.mcAnswers;
+    temp.push(e)
+    console.log(temp)
+    this.setState({
+      mcAnswers: temp
+    }, () => {
+      console.log(this.state.mcAnswers)
+    });
   }
 
   addOption() {
-    let temp = [];
-    this.state.mcAnswers.map((answer) => {
-      temp.push(answer);
-    });
+    let temp = this.state.mcAnswers;
     temp.push('');
     this.setState({
       mcAnswers: temp
     });
   }
 
-  deleteOption(e, data) {
+  deleteOption(e) {
     let temp = [];
-    let target = 0;
-    console.log(e.nativeEvent.value, 'OR', data)
-    // console.log(target)
-    this.state.mcAnswers.map((answer) => {
-      if(answer !== target) {
+    console.log(e.target.value)
+
+    this.state.mcAnswers.map((answer, index) => {
+      if(index !== e.target.value) {
+        console.log('hi')
         temp.push(answer);
       }
     });
+    console.log(temp)
     this.setState({
       mcAnswers: temp
     });
@@ -150,8 +158,14 @@ class Question extends React.Component {
             :
             <div>
               {this.state.mcAnswers.map((answer, i) => {
-                return (<MultipleChoice type={this.state.mcType} key={i} value={answer} answerChange={this.saveAnswer} deleteOption={this.deleteOption}/> )
+                return (
+                  <div key={answer + i}>
+                    <MultipleChoice type={this.state.mcType} key={i} index={i} value={answer} answerChange={this.saveAnswer} deleteOption={this.deleteOption}/>
+                    <Button key={answer} value={i} onClick={this.deleteOption}>-</Button>
+                  </div>
+                )
               }) }
+              {' '}
               <Button onClick={this.addOption}>+</Button>
             </div>
           }
@@ -169,16 +183,6 @@ class Question extends React.Component {
           </FormGroup>
         </Form>
       </div>
-        //question input
-          //onchange //value 
-        //shortAnswer input
-          //onchange //value
-        //multiple choice options & answers
-          //onchange //value //onclick=delete for each
-        //related slides
-          //onchange //value
-        //add more button
-        //delete button
     )
   }
 }
