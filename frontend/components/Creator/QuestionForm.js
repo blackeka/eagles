@@ -26,6 +26,7 @@ class Question extends React.Component {
     this.addOption = this.addOption.bind(this);
     this.deleteOption = this.deleteOption.bind(this);
     this.saveAnswer = this.saveAnswer.bind(this);
+    this.saveQuestionForm = this.saveQuestionForm.bind(this);
   }
 
   questionChange(e) {
@@ -49,7 +50,7 @@ class Question extends React.Component {
 
   relatedSlideChange(e) {
     this.setState({
-      relatedSlide: e.target.value
+      relatedSlides: e.target.value
     });
   }
   
@@ -83,11 +84,11 @@ class Question extends React.Component {
     });
   }
 
-  saveAnswer(e) {
+  saveAnswer(answer, correctness) {
     // e.preventDefault()
-        console.log('save answer', e,  'hi')
+        console.log('save answer', correctness)
     let temp = this.state.mcAnswers;
-    temp.push(e)
+    temp.push({answer, correctness})
     console.log(temp)
     this.setState({
       mcAnswers: temp
@@ -119,6 +120,16 @@ class Question extends React.Component {
     this.setState({
       mcAnswers: temp
     });
+  }
+
+  saveQuestionForm() {
+    //send question, answers, and slides
+    let q = this.state.question;
+    let sA = this.state.shortAnswer;
+    let mcA = this.state.mcAnswers;
+    let slides = this.state.relatedSlides;
+    console.log(`what ${slides}`)
+    this.props.onSave(q, sA, mcA, slides);
   }
 
   render() {
@@ -179,6 +190,7 @@ class Question extends React.Component {
               onChange={this.relatedSlideChange}
             />
           </FormGroup>
+          <Button onClick={this.saveQuestionForm}>Save Question</Button>
         </Form>
       </div>
     )
