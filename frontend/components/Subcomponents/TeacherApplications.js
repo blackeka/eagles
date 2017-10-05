@@ -30,7 +30,7 @@ class TeacherApplications extends React.Component {
     let approveObj = {
       student: student,
       class: klass,
-      status: false
+      status: true
     }
     return fetch('/applications', {
       method: "PUT",
