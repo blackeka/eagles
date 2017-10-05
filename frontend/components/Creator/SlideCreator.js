@@ -33,6 +33,18 @@ class SlideCreator extends React.Component {
     this.submitSlide()
   }
 
+  editState(name, youTubeUrl, text, quizUrl, callback){
+    console.log(youTubeUrl)
+    this.setState({
+      name,
+      youTubeUrl,
+      quizUrl,
+      text
+    }, () => {
+      callback()
+    })
+  }
+
   submitSlide(){
     if (this.state.name !== '') {
       if (this.state.youTubeUrl !== '') {
@@ -116,6 +128,7 @@ class SlideCreator extends React.Component {
   }
 
   youTubeQueryToServer(searchString, cb) {
+    console.log('seeaarch', searchString)
     fetch('/query?string=' + searchString, {
       method: "GET",
        headers: {
@@ -213,7 +226,7 @@ class SlideCreator extends React.Component {
       );
     } else {
       return (
-        <Uploader uploadToggle={this.uploadToggle.bind(this)}/>
+        <Uploader lessonRef={this.state.lessonRef} youTubeQueryToServer={this.youTubeQueryToServer}  uploadToggle={this.uploadToggle.bind(this)} fetch={this.props.fetch}/>
       )
     }
   }

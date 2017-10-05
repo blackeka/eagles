@@ -8,6 +8,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
+const csv = require('csvtojson');
 
 // create express instance
 const app = express();
@@ -42,7 +43,22 @@ app.use(express.static('../frontend/public'));
 app.get('/logout', checkAuth.logout);
 app.post('/users', checkAuth.createAccount);
 app.post('/login', checkAuth.attemptLoggin);
+
+
 app.use(checkAuth.checkUser);
+app.post('/upload', (req, res) => {
+  let csvStr = req.body.result
+  let result = []
+  csv()
+    .fromString(csvStr)
+    .on('json',(jsonObj)=>{
+      result.push(jsonObj)
+     })
+    .on('done',()=>{
+      res.send(result)
+    })
+})
+
 
 // ------------------------------------------------ //
 

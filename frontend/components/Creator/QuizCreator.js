@@ -16,7 +16,7 @@ class Quiz extends React.Component {
   render() {
     return (
       for (let i = 0; i < this.state.questionCount; i++) {
-        
+
       }
     )
   }
