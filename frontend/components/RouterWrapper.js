@@ -30,7 +30,7 @@ class RouterWrapper extends Component {
   }
 
   componentDidMount() {
-    this.getLessons();
+    // this.getLessons();
   }
 
   getLessons() {
@@ -44,7 +44,7 @@ class RouterWrapper extends Component {
     .then((res) => res.json())
     .then((lessons) => {
       this.setState({lessons});
-      return lessons
+      // return lessons
     })
     .catch((err) => console.log('Error getting lessons', err));
   }
