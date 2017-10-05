@@ -166,6 +166,7 @@ class RouterWrapper extends Component {
                 <TeacherDashboard
                   username={this.state.user.username}
                   userRef={this.state.user._id}
+                  role={this.state.user.role}
                   allLessons={this.state.lessons}
                 />
               )}
@@ -223,6 +224,8 @@ class RouterWrapper extends Component {
               render={() => (
                 <StudentDashboard
                   studentname={this.state.user.username}
+                  studentId={this.state.user._id}
+                  role={this.state.user.role}
                   />
               )}
             />

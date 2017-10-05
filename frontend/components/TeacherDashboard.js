@@ -110,7 +110,7 @@ class TeacherDashboard extends React.Component {
           <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button><br></br>
           {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass} allLessons={this.props.allLessons}/> : ''}
           <hr></hr>
-          <SingleClass selectedClass={this.state.selectedClassObj}/>
+          <SingleClass selectedClass={this.state.selectedClassObj} role={this.props.role}/>
         </div>
       </div>
     )
