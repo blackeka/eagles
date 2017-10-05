@@ -22,13 +22,11 @@ class MultipleChoice extends React.Component  {
               placeholder="Enter multiple choice answer"
               inputRef={(FormControl) => this.answer = FormControl} 
             />
-            <Button onClick={e => this.props.answerChange.call(e)}  type="submit">Save Answer</Button>
-          </FormGroup>
-          
+            <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
+          </FormGroup>        
         </Checkbox>) : 
         (
-          <Form>
-          <Radio>
+        <Radio>
           <FormGroup controlId="formControlsCheckboxes">
             <ControlLabel>Answer Choice</ControlLabel>
             {' '}
@@ -37,10 +35,9 @@ class MultipleChoice extends React.Component  {
               placeholder="Enter multiple choice answer" 
               inputRef={(input) => this.answer = input} 
             />
-            </FormGroup>
-            <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
+          </FormGroup>
+          <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
         </Radio>
-        </Form>
         )
       }
       </div>

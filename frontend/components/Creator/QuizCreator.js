@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionForm from './QuestionForm.js';
+import Question from './QuestionForm.js';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -15,9 +15,10 @@ class Quiz extends React.Component {
 
   render() {
     return (
-      for (let i = 0; i < this.state.questionCount; i++) {
-
-      }
+      <div>
+        <h1>Create A Quiz</h1>
+        <Question />
+      </div>
     )
   }
 }
