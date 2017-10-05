@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeacherClasses = (props) => {
+const StudentClasses = (props) => {
 
   const handleClassChange = (e) => {
     props.classSelectCb(e.target.value)
@@ -11,7 +11,7 @@ const TeacherClasses = (props) => {
       <h3> Classes </h3>
       <select value={props.selectedClass} onChange={handleClassChange}>
         <option> - Select your class - </option>
-        {props.classList.filter(tclass => tclass.teacher === props.teachername).map((tclass, i) => (
+        {props.classList.map((tclass, i) => (
           <option key={i}> {tclass.name} </option>
         ))}
       </select>
@@ -19,4 +19,4 @@ const TeacherClasses = (props) => {
   )
 };
 
-export default TeacherClasses;
+export default StudentClasses;
