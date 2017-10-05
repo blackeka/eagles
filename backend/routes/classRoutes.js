@@ -30,9 +30,7 @@ router.put('/classes', (req, res) => {
     _id: req.body.userID
   })
   .then( (result) => {
-    console.log('result from put', result)
     result.classes.push(req.body.classID)
-    console.log('updated class array', result.classes)
     result.save();
     res.send('user is now in class! or rather, class is now in user')
   })
