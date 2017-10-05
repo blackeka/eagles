@@ -119,7 +119,9 @@ class Uploader extends React.Component {
             name: obj.name,
             lessonRef: this.props.lessonRef,
             text: obj.text,
-            quizUrl: obj.quiz
+            quizUrl: obj.quiz,
+            youTubeTags: '',
+            youTubeThumbnailUrl: ''
           }),
           headers: {
             "Content-Type": "application/json",
