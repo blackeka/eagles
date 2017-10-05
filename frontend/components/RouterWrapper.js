@@ -173,7 +173,6 @@ class RouterWrapper extends Component {
               render={() => (
                 <LessonPreviewContainer
                   lessons= { this.state.lessons.filter((lsn) => lsn.userRef === this.state.user._id) }
-<<<<<<< HEAD
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }
                   teacherId={this.state.user._id}
@@ -184,8 +183,6 @@ class RouterWrapper extends Component {
               render={() => (
                 <LessonPreviewContainer
                   lessons= { this.state.lessons }
-=======
->>>>>>> roles
                   organizeSearchResultsBasedOnMostLikes={ this.organizeSearchResultsBasedOnMostLikes }
                   getLessons={ this.getLessons }
                   teacherId={this.state.user._id}
