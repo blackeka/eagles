@@ -54,7 +54,7 @@ class NavBar extends Component {
                     <Button>My Lessons</Button>
                   </Link>{' '}
                 <Link to='/create'>
-                  <Button>Create</Button>
+                  <Button className="create">Create</Button>
                 </Link>{' '}
                 <Link to='/applications'>
                   <Button>Applications</Button>

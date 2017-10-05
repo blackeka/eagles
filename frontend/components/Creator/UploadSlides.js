@@ -47,7 +47,7 @@ class Uploader extends React.Component {
       });
       if (commaCount / newLineCount !== 3){
         alert('Too many columns, please ensure you have only the four required columns and no commas in cells')
-        return
+        return 'error involving commas'
       }
       let headers = ['quiz','text','youtubeurl','name']
       axios.post('/upload', {
@@ -80,6 +80,23 @@ class Uploader extends React.Component {
       })
     }
     reader.readAsText(files[0]);
+  }
+  testFail(e){
+    e.preventDefault()
+    let test = 'test,test,test,test\ndata,data,data,data\n'
+    let myblob = new Blob([test], {
+      type: 'text/plain'
+    });
+    this.handleFiles([myblob])
+  }
+
+  testPass(e){
+    e.preventDefault()
+    let test = 'quiz,name,text,youtubeurl\ndata,,data,data\n'
+    let myblob = new Blob([test], {
+      type: 'text/plain'
+    });
+    this.handleFiles([myblob])
   }
 
   submitSlide(obj){
@@ -148,13 +165,21 @@ class Uploader extends React.Component {
           </div>
         </FormGroup>
         <h6>Please upload a CSV with headers 'quiz','text','youtubeurl' and 'name'. Name is required.</h6 >
-        <FormGroup>
-          <Col smOffset={0} sm={2}>
-            <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
-              <Button className='btn' bsStyle="primary" bsSize="small">Upload</Button>
-            </ReactFileReader>
-          </Col>
-        </FormGroup>
+        {this.props.username === 'cypress' ?  (
+          <div>
+            <button className='fail' name="button" onClick={this.testFail.bind(this)}>Test Fail</button>
+            <button className='pass' name="button" onClick={this.testPass.bind(this)}>Test Pass</button>
+          </div>
+        )
+        :  (
+          <FormGroup>
+            <Col smOffset={0} sm={2}>
+              <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
+                <Button className='btn' bsStyle="primary" bsSize="small">Upload</Button>
+              </ReactFileReader>
+            </Col>
+          </FormGroup>
+        )}
         <FormGroup>
           <Col smOffset={0} sm={2}>
             <Button className='btn' onClick={this.props.uploadToggle} bsStyle="warning" bsSize="small">

@@ -228,7 +228,7 @@ class SlideCreator extends React.Component {
       );
     } else {
       return (
-        <Uploader lessonRef={this.state.lessonRef} youTubeQueryToServer={this.youTubeQueryToServer}  uploadToggle={this.uploadToggle.bind(this)} fetch={this.props.fetch}/>
+        <Uploader username={this.props.username} lessonRef={this.state.lessonRef} youTubeQueryToServer={this.youTubeQueryToServer}  uploadToggle={this.uploadToggle.bind(this)} fetch={this.props.fetch}/>
       )
     }
   }
