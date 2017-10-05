@@ -85,14 +85,6 @@ class TeacherDashboard extends React.Component {
       <div classID='teacherDashboardContainer'>
         <h1> Welcome back, {this.props.username}!</h1><br></br>
         <div classID='teacherClasses'>
-          <TeacherClasses classList={this.state.classList} teachername={this.props.username}/>
-          <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button>
-        <h1> Welcome back, {this.props.username}!</h1>
-        <div classID='teacherClasses'>
-          <TeacherClasses classList={this.state.classList} teachername={this.props.username}/>
-          <button onClick={() => this.setState({ showCreateClassForm: true})}> Create Class! </button>
-        <h1> Welcome back, {this.props.username}!</h1><br></br>
-        <div classID='teacherClasses'>
           <TeacherClasses classList={this.state.classList} teachername={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
           <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button><br></br>
           {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass}/> : ''}
