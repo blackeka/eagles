@@ -12,7 +12,7 @@ var Schema = mongoose.Schema;
 var classSchema = new Schema({
   name: String,
   teacher: String,
-  lessons: [String]
+  lessons: String
 })
 var Class = mongoose.model('Class', classSchema);
 

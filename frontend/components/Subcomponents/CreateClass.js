@@ -6,27 +6,34 @@ class CreateClass extends React.Component {
     super(props);
     this.state = {
       className: '',
-      lessons: []
+      selectedLesson: ''
     }
     //bindings
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLessonSelect = this.handleLessonSelect.bind(this);
   }
 
   handleSubmit() {
     let classObj = {
       name: this.state.className,
       teacher: this.props.teachername,
-      lessons: []
+      lessons: this.state.selectedLesson
     }
     this.setState({
       className: '',
-      lessons: []
+      lessons: ''
     })
     this.triggerCallback(classObj)
   }
 
   triggerCallback(classObj) { //unbound
     this.props.createNewClass(classObj);
+  }
+
+  handleLessonSelect(e) {
+    this.setState({
+      selectedLesson: e.target.value
+    })
   }
 
   render() {
@@ -43,6 +50,12 @@ class CreateClass extends React.Component {
               />
             </Col>
           </FormGroup>
+          <select onChange={this.handleLessonSelect}>
+            <option> - Select your lesson - </option>
+            {this.props.allLessons.map((lesson, i) => (
+              <option key={i}> {lesson.name} </option>
+            ))}
+          </select>
           <FormGroup>
             <Col sm={10}>
             <Button onClick={this.handleSubmit}>

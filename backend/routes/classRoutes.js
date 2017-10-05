@@ -10,7 +10,7 @@ router.post('/classes', (req, res) => {
   Class.create({
     name: req.body.name,
     teacher: req.body.teacher,
-    lessons: req.body.lessons || [],
+    lessons: req.body.lessons
   })
   .then( () => {
     res.send('class created')

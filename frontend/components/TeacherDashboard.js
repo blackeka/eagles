@@ -39,7 +39,7 @@ class TeacherDashboard extends React.Component {
         .then( (response) => response.json())
         .then( (allUsers) => {
           var studentList = allUsers.filter((user) => user.classes.includes(klass._id) || user.classes.includes(klass.name));
-          console.log('student list for class', studentList)
+          // console.log('student list for class', studentList)
           klass['students'] = studentList;
           var newClassListWithStudents = this.state.classListWithStudents;
           newClassListWithStudents.push(klass);
@@ -53,32 +53,51 @@ class TeacherDashboard extends React.Component {
   }
 
   createNewClass(classObj) {
-    //axios post call
-    axios.post('/classes', {
-      name: classObj.name,
-      teacher: this.props.username,
-      lessons: []
-    })
+    axios.post('/classes', classObj)
     .then( () => {
       return fetch('/classes', { method: 'GET', credentials: "include" })
       .then( (res) => res.json())
       .then((JSONresponse) => {
         console.log('response from classes endpoint', JSONresponse)
+        var teachersClasses = JSONresponse.filter((clas) => clas.teacher === this.props.username)
         this.setState({
-          classList: JSONresponse,
-          showCreateClassForm: false
-        })
+          classList: teachersClasses,
+          showCreateClassForm: false,
+        }, () => {
+        this.state.classList.forEach((klass) => {
+          return fetch('/users', { method: 'GET', credentials: "include"})
+          .then( (response) => response.json())
+          .then( (allUsers) => {
+            var studentList = allUsers.filter((user) => user.classes.includes(klass._id) || user.classes.includes(klass.name));
+            klass['students'] = studentList;
+            var newClassListWithStudents = this.state.classListWithStudents;
+            newClassListWithStudents.push(klass);
+            this.setState({
+              classListWithStudents: newClassListWithStudents,
+              selectedClassObj: newClassListWithStudents[0]
+            })
+          })
+        })})
       })
     })
+    .then( () => this.selectClass(classObj.name))
   };
 
   selectClass(selClass) {
-
     var selClassObj = this.state.classListWithStudents.filter((klass) => klass.name === selClass)[0];
+    //want to replace the lesson string in this object with the lesson object itself
+    console.log('selected class object before anything', selClassObj)
+    var selClassLessonName = selClassObj.lessons;
+    fetch('/lessons', { method: "GET", headers: { "Content-Type": "application/json" }, credentials: "include" })
+    .then( (res) => res.json())
+    .then((allLessons) => {
+      var desiredLessonObj = allLessons.filter((lesson) => lesson.name === selClassLessonName)[0];
+      selClassObj.lessons = desiredLessonObj;
       this.setState({
         selectedClassName: selClass,
         selectedClassObj: selClassObj
       }, () => console.log('selected class', this.state.selectedClassObj))
+    })
   }
 
 
@@ -89,8 +108,9 @@ class TeacherDashboard extends React.Component {
         <div classID='teacherClasses'>
           <TeacherClasses classList={this.state.classList} teachername={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
           <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button><br></br>
-          {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass}/> : ''}
-          <SingleClass selectedClass={this.state.selectedClassObj}/>
+          {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass} allLessons={this.props.allLessons}/> : ''}
+          <hr></hr>
+          <SingleClass selectedClass={this.state.selectedClassObj} role={this.props.role}/>
         </div>
       </div>
     )
