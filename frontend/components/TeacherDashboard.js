@@ -2,18 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import TeacherClasses from './Subcomponents/TeacherClasses';
 import CreateClass from './Subcomponents/CreateClass';
+import SingleClass from './Subcomponents/SingleClass';
 
 class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      classList: [{name: 'test', students: ['a', 'b']}],
+      classList: [{name: 'placeholder'}],
+      classListWithStudents: [],
       studentList: [],
       lessonList: [],
-      showCreateClassForm: false
+      showCreateClassForm: false,
+      selectedClassName: '',
+      selectedClassObj: {}
     }
     //bindings
     this.createNewClass = this.createNewClass.bind(this);
+    this.selectClass = this.selectClass.bind(this);
   }
   //functions
 
@@ -23,8 +28,25 @@ class TeacherDashboard extends React.Component {
     .then((JSONresponse) => {
       console.log('response from classes endpoint', JSONresponse)
       this.setState({
-        classList: JSONresponse
+        classList: JSONresponse,
+        selectedClassName: JSONresponse[0].name,
+        selectedClassObj: JSONresponse[0]
       }, () => console.log('state after mount', this.state))
+    })
+    .then( () => {
+      this.state.classList.forEach((klass) => {
+        return fetch('/users', { method: 'GET', credentials: "include"})
+        .then( (response) => response.json())
+        .then( (allUsers) => {
+          var studentList = allUsers.filter((user) => user.classes.includes(klass._id));
+          klass.students = studentList;
+          var newClassListWithStudents = this.state.classListWithStudents;
+          newClassListWithStudents.push(klass);
+          this.setState({
+            classListWithStudents: newClassListWithStudents
+          })
+        })
+      })
     })
   }
 
@@ -48,10 +70,20 @@ class TeacherDashboard extends React.Component {
     })
   };
 
+  selectClass(selClass) {
+
+    var selClassObj = this.state.classListWithStudents.filter((klass) => klass.name === selClass)[0];
+      this.setState({
+        selectedClassName: selClass,
+        selectedClassObj: selClassObj
+      }, () => console.log('selected class', this.state.selectedClassObj))
+  }
+
 
   render() {
     return (
       <div classID='teacherDashboardContainer'>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <h1> Welcome back, {this.props.username}!</h1><br></br>
         <div classID='teacherClasses'>
@@ -63,7 +95,14 @@ class TeacherDashboard extends React.Component {
           <TeacherClasses classList={this.state.classList} teachername={this.props.username}/>
           <button onClick={() => this.setState({ showCreateClassForm: true})}> Create Class! </button>
 >>>>>>> front end routes working again
+=======
+        <h1> Welcome back, {this.props.username}!</h1><br></br>
+        <div classID='teacherClasses'>
+          <TeacherClasses classList={this.state.classList} teachername={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
+          <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button><br></br>
+>>>>>>> roles
           {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass}/> : ''}
+          <SingleClass selectedClass={this.state.selectedClassObj}/>
         </div>
       </div>
     )
