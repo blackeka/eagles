@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Uploader from './UploadSlides.js'
+import Quiz from './QuizCreator.js';
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +17,8 @@ class SlideCreator extends React.Component {
       quizUrl: props.slide.quizUrl || '',
       old: props.slide.old || '',
       lessonRef: props.lessonRef,
-      upload: false
+      upload: false,
+      createQuiz: false
     }
   }
   reset () {
@@ -147,8 +149,14 @@ class SlideCreator extends React.Component {
     })
   }
 
+  handleCreateQuiz() {
+    this.setState({
+      createQuiz: !this.state.createQuiz
+    })
+  }
+
   render () {
-    if (!this.state.upload){
+    if (!this.state.upload && !this.state.createQuiz){
       return (
         <Form horizontal onSubmit={this.onSubmit.bind(this)}>
           <FormGroup>
@@ -221,11 +229,15 @@ class SlideCreator extends React.Component {
                   Finish Update
                 </Button>)
               }
-              <Link to="/quiz"><Button>Create Quiz</Button></Link>
+              <Button onClick={this.handleCreateQuiz.bind(this)}>Create Quiz</Button>
             </Col>
           </FormGroup>
         </Form>
       );
+    } else if (this.state.createQuiz) {
+      return (
+        <Quiz lessonRef={this.state.lessonRef} createToggle={this.handleCreateQuiz.bind(this)}/>
+      )
     } else {
       return (
         <Uploader username={this.props.username} lessonRef={this.state.lessonRef} youTubeQueryToServer={this.youTubeQueryToServer}  uploadToggle={this.uploadToggle.bind(this)} fetch={this.props.fetch}/>

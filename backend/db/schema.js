@@ -37,6 +37,15 @@ var userSchema = new Schema({
 });
 var User = mongoose.model('User', userSchema);
 
+let quizSchema = new Schema({
+  quizCode: String,
+  questions: [String],
+  answers: [String],
+  relatedSlides: [String],
+  lessonRef: String
+})
+let Quiz = mongoose.model('Quiz', quizSchema);
+
 //////////////////
 
 var lessonSchema = new Schema({
@@ -68,5 +77,6 @@ module.exports = {
   Lesson: Lesson,
   Slide: Slide,
   Class: Class,
-  Application: Application
+  Application: Application,
+  Quiz: Quiz
 }
