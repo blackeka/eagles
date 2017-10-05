@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-class Slide extends React.Component { 
+class Slide extends React.Component {
   constructor(props) {
   super(props);
   this.state = {
@@ -9,7 +9,7 @@ class Slide extends React.Component {
 }
   render() {
     return (
-    <div>
+    <div style={slideContainerStyle}>
       <h1>{ this.props.slideData.name || 'No Slide Name' }</h1>
       <div className="youtubeVideoContainer">
       { this.props.videoIdOfClickedOnVideo ? (
@@ -19,7 +19,7 @@ class Slide extends React.Component {
       )}
         <p className="slideText">{this.props.slideData.text}</p>
       </div>
-      <div> 
+      <div>
           <p>{this.props.slideData.quizUrl}</p>
       </div>
       <div className="slideButtons"  style={{float: "right"}}>
@@ -32,5 +32,12 @@ class Slide extends React.Component {
   }
 }
 
+const slideContainerStyle = {
+  border: "solid black 1px",
+  borderRadius: "10px",
+  width: "65%",
+  margin: 'auto',
+  textAlign: "center"
+}
 
 export default Slide;

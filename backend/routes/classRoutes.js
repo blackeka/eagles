@@ -27,10 +27,11 @@ router.get('/classes', (req, res) => {
 
 router.put('/classes', (req, res) => {
   User.findOne({
-    _id: req.body.userID
+    username: req.body.student
   })
   .then( (result) => {
-    result.classes.push(req.body.classID)
+    result.classes.push(req.body.class);
+    console.log('after class is added', result.classes)
     result.save();
     res.send('user is now in class! or rather, class is now in user')
   })

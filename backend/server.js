@@ -19,6 +19,7 @@ const lessonRoutes = require('./routes/lessonRoutes');
 const slideRoutes = require('./routes/slideRoutes');
 const classRoutes = require('./routes/classRoutes');
 const utilRoutes = require('./routes/utilRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 const checkAuth = require('./checkAuth');
 
 
@@ -73,6 +74,7 @@ app.all('/lesson', lessonRoutes);
 app.all('/lesson/*', lessonRoutes);
 app.all('/query', utilRoutes);
 app.all('/classes', classRoutes);
+app.all('/applications', applicationRoutes)
 
 // redirect any uncaught routes
 app.use((req, res) => {
