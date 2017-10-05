@@ -5,8 +5,16 @@ class MultipleChoice extends React.Component  {
   constructor(props) {
     super(props);
     this.state = {
-      answer: '',
+      correctness: 'correct',
     }
+    this.handleCorrectness = this.handleCorrectness.bind(this);
+  }
+
+  handleCorrectness(e) {
+    console.log(e.target.value)
+    this.setState({
+      correctness: e.target.value
+    })
   }
 
   render () {
@@ -22,8 +30,19 @@ class MultipleChoice extends React.Component  {
               placeholder="Enter multiple choice answer"
               inputRef={(FormControl) => this.answer = FormControl} 
             />
-            <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
-          </FormGroup>        
+          </FormGroup>    
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Select</ControlLabel>
+            {' '}
+            <FormControl value={this.state.value} onChange={this.handleCorrectness}
+              componentClass="select" 
+              placeholder="correct" 
+            >
+              <option value="correct">correct</option>
+              <option value="incorrect">incorrect</option>
+            </FormControl>
+            <Button onClick={() => this.props.answerChange(this.answer.value, this.state.correctness)}>Save Answer</Button>
+          </FormGroup>    
         </Checkbox>) : 
         (
         <Radio>
@@ -33,10 +52,22 @@ class MultipleChoice extends React.Component  {
             <FormControl 
               type="text" 
               placeholder="Enter multiple choice answer" 
-              inputRef={(input) => this.answer = input} 
+              inputRef={(FormControl) => this.answer = FormControl} 
             />
           </FormGroup>
-          <Button onClick={() => this.props.answerChange(this.answer.value)}>Save Answer</Button>
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Select</ControlLabel>
+            {' '}
+            <FormControl 
+              componentClass="select" 
+              placeholder="correct" 
+              onChange={this.handleCorrectness}
+            >
+              <option value="correct">correct</option>
+              <option value="incorrect">incorrect</option>
+            </FormControl>
+          </FormGroup>   
+          <Button onClick={() => this.props.answerChange(this.answer.value, this.state.correctness)}>Save Answer</Button>
         </Radio>
         )
       }
