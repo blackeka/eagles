@@ -13,7 +13,8 @@ class Question extends React.Component {
       currentQindex: 0,
       mcType: false,
       answerCount: 0,
-      type: null
+      type: null,
+      disabled: ''
     }
 
     this.questionChange = this.questionChange.bind(this);
@@ -128,7 +129,9 @@ class Question extends React.Component {
     let sA = this.state.shortAnswer;
     let mcA = this.state.mcAnswers;
     let slides = this.state.relatedSlides;
-    console.log(`what ${slides}`)
+    this.setState({
+      disabled: 'disabled'
+    })
     this.props.onSave(q, sA, mcA, slides);
   }
 
@@ -190,7 +193,7 @@ class Question extends React.Component {
               onChange={this.relatedSlideChange}
             />
           </FormGroup>
-          <Button onClick={this.saveQuestionForm}>Save Question</Button>
+          <Button onClick={this.saveQuestionForm} >Save Question</Button>
         </Form>
       </div>
     )
