@@ -5,9 +5,9 @@ import { ListGroupItem, Header, Button } from 'react-bootstrap';
 const LessonPreview = (props) => {
   return (
     <div className="LessonPreview">
-      <ListGroupItem header={props.lesson.name || 'no name'}>
+      <ListGroupItem header={props.lesson.name || 'no lessons yet'}>
         <br />
-          {props.lesson.description || 'no description'} 
+          {props.lesson.description || 'no description yet'}
           <br />
         <Link to={'/lesson/' + props.lesson._id}>
           <Button bsStyle="primary" bsSize="small" >View Lesson</Button>

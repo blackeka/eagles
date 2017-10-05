@@ -107,6 +107,10 @@ class Lesson extends React.Component {
     .catch(function(err) {
       console.log(err);
     })
+  };
+
+  addToClass(e) {
+
   }
 
   render() {
@@ -141,6 +145,7 @@ class Lesson extends React.Component {
               </Grid>
             </div>
             <Button type="button" onClick={this.likeALesson.bind(this)}>Like</Button>
+            <Button type="button" onClick={this.addToClass.bind(this)}>Add to Class</Button>
           </div>
         )}
       </div>

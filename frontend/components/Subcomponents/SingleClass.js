@@ -1,11 +1,13 @@
 import React from 'react';
+import LessonPreview from '../Lesson/LessonPreview';
 
 const SingleClass = (props) => {
 
   return (
     <div className='classContainer'>
       <h3> Class name: "{props.selectedClass.name || ''}" </h3>
-      <p> Lessons: {props.selectedClass.lessons || ''} </p>
+      <p> Lessons: </p>
+      <LessonPreview lesson={props.selectedClass.lessons || {} } />
       <p> Students: </p>
       <div classID='studentsenrolled'>
         <ol>
