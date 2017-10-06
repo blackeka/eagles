@@ -53,8 +53,8 @@ class Lesson extends React.Component {
 
   exit() {
     this.setState({
-      currentSlide: '',
-      index: ''
+      currentSlide: null,
+      index: 0
     });
   }
 
