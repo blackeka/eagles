@@ -19,22 +19,46 @@ class Lesson extends React.Component {
   }
 
   componentDidMount() {
-     fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" })
+     return fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" })
       .then((response) => response.json())
       .then((lessonDataJSON) => {
         console.log('LESSON DATA', lessonDataJSON);
         this.setState({
-          specificLesson: lessonDataJSON,
-          slides: lessonDataJSON.slides
-        });
-        console.log('the specific lesson', this.state.specificLesson);
+          specificLesson: lessonDataJSON
+        })
+        var slidesForLesson = lessonDataJSON.slides;
+        var lessonRef = lessonDataJSON._id;
+        //do it with lessonRef instead, change findSLides route
+        var allSlideObjsForLesson = [];
+
+          var objForMongo = {
+            lessonRef: lessonRef
+          }
+          return fetch('/findslides', {
+            method: "POST",
+            body: JSON.stringify(objForMongo),
+            headers: {
+              "Content-Type": "application/json"
+            },
+            credentials: "include"
+          })
+          .then( (data) => data.json())
+          .then( (JSONdata) => {
+            // console.log('response from slides', JSONdata)
+            allSlideObjsForLesson = allSlideObjsForLesson.concat(JSONdata)
+            console.log('allSlideObjsForLesson', allSlideObjsForLesson)
+            this.setState({
+              slides: allSlideObjsForLesson
+            }, () => console.log('state mount cb', this.state));
+          })
+
       })
       .then( () => {
           console.log('Role going into lesson', this.props.role);
           if (this.props.role === 'student') {
             this.setState({
               currentSlide: this.state.slides[0]
-            })
+            }, () => console.log('students first slide', this.state.currentSlide))
           }
         })
   }
@@ -59,7 +83,7 @@ class Lesson extends React.Component {
   }
 
   goToQuiz() {
-    
+
   }
 
   previousSlideClick(index) {
@@ -133,7 +157,7 @@ class Lesson extends React.Component {
   render() {
     return (
       <div>
-        { this.state.currentSlide ? (
+        { this.state.currentSlide !== null ? (
           <Slide
           slideData={this.state.currentSlide}
           videoIdOfClickedOnVideo={this.state.videoIdOfClickedOnVideo}
