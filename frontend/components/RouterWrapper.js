@@ -30,7 +30,7 @@ class RouterWrapper extends Component {
   }
 
   componentDidMount() {
-    // this.getLessons();
+    this.getLessons();
   }
 
   getLessons() {
