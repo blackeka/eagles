@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Panel, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
-import QuizView from '../Lesson/Quiz.js';
 
 class Login extends Component {
   constructor(props) {
@@ -100,7 +99,6 @@ class Login extends Component {
             </Col>
             </FormGroup>
           )}
-          <QuizView />
         </Form>
         )
     }
