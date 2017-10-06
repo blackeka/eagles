@@ -25,7 +25,7 @@ class QuizView extends React.Component {
     //get a entered quizcode as prop
     let quizCode = this.props.quizCode;
     //axios.get everything about quiz
-    axios.get('/quiz', {params: {quizCode: 3698}})
+    axios.get('/quiz', {params: {quizCode: quizCode}})
       .then((response) => {
         let answers = response.data[0].answers
         answers = JSON.parse(answers)
