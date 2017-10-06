@@ -24,8 +24,19 @@ class Slide extends React.Component {
       </div>
       <div className="slideButtons"  style={{float: "right"}}>
         <Button type="button" onClick={() => this.props.previousSlideClick(this.props.index)}>Previous Slide</Button>
-        <Button type="button" onClick={() => this.props.nextSlideClick(this.props.index)}>Next Slide</Button>
-        <Button type="button" onClick={() => this.props.exitClick()}>Exit</Button>
+        <Button type="button" onClick={() => this.props.nextSlideClick(this.props.index)}>Next Slide</Button><br></br>
+        <progress value={this.props.index} max={this.props.totalLength}>Progress</progress>
+        { this.props.role === 'teacher' ?
+          ( <div className='teacherOptions'>
+            <Button type="button" onClick={() => this.props.goToQuiz()}>Quiz</Button>
+            <Button type="button" onClick={() => this.props.exitClick()}>Exit</Button>
+          </div> )
+          : ( this.props.complete ? (
+            <Button type="button" onClick={() => this.props.goToQuiz()}>Quiz</Button>
+          ) : ''
+          )
+
+        }
       </div>
     </div>
     );

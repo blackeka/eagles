@@ -191,7 +191,16 @@ class RouterWrapper extends Component {
                 />
               )}
             />
-            <Route path='/lesson/:id' component={ Lesson } />
+
+          <Route path='/lesson/:id'
+            render={ (props) => (
+              <Lesson
+                {...props}
+                role={this.state.user.role}
+                />
+            )}
+          />
+
             <Route path='/create'
               render={ () => (
                 <LessonCreator
@@ -237,9 +246,16 @@ class RouterWrapper extends Component {
                   />
               )}
             />
+
             <Route path='/lesson/:id'
-              component={ Lesson }
+              render={ (props) => (
+                <Lesson
+                  {...props}
+                  role={this.state.user.role}
+                  />
+              )}
             />
+
             <Route path='/user' render={ () =>
                 <User
                   user={ this.state.user }
