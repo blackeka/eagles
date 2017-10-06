@@ -97,6 +97,7 @@ class Uploader extends React.Component {
       type: 'text/plain'
     });
     this.handleFiles([myblob])
+    axios.delete('/lessons')
   }
 
   submitSlide(obj){
