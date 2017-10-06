@@ -47,7 +47,7 @@ class QuestionView extends React.Component {
           {this.state.mcType === "false" ? 
             <FormGroup controlId="formControlsShortAnswer">
               <ControlLabel>Short Answer</ControlLabel>
-              <FormControl componentClass="testarea" placeholder="Type your answer here" />
+              <FormControl componentClass="textarea" placeholder="Type your answer here" />
             </FormGroup> : 
             <div>
               <FormGroup controlId="formControlsMultipleChoice">
