@@ -56,24 +56,13 @@ const sendCongad = (userRef, lessonName, numLikes) => {
 
 //find specific lesson
 router.get('/lesson/:lessonId', function(req, res) {
-  Lesson.find({_id: req.params.lessonId})
+  Lesson.findOne({_id: req.params.lessonId})
   .then(function(lesson) {
-    return lesson[0];
+    return lesson;
   })
   .then((specificLesson) => {
-    Slide.find({})
-    .then((allSlides) => {
-      specificLesson.slides = allSlides.filter((slide) => {
-        if (specificLesson.slides.indexOf(slide._id) >= 0) {
-          return slide;
-        }
-      });
-      return specificLesson;
+      res.send(specificLesson);
     })
-    .then((lessonWithSlides) => {
-      res.send(lessonWithSlides);
-    })
-  })
   .catch(function(err) {
     res.send(err);
   })

@@ -21,6 +21,7 @@ const classRoutes = require('./routes/classRoutes');
 const utilRoutes = require('./routes/utilRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const quizRoutes = require('./routes/quizRoutes');
+const findSlidesRoutes = require('./routes/findSlides');
 const checkAuth = require('./checkAuth');
 
 
@@ -77,6 +78,7 @@ app.all('/query', utilRoutes);
 app.all('/classes', classRoutes);
 app.all('/applications', applicationRoutes)
 app.all('/quiz', quizRoutes);
+app.all('/findslides', findSlidesRoutes)
 // redirect any uncaught routes
 app.use((req, res) => {
   res.redirect('/');
