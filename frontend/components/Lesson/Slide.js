@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import Quiz from './Quiz.js';
 
 class Slide extends React.Component {
@@ -12,7 +12,8 @@ class Slide extends React.Component {
   }
   
   goToQuiz(e) {
-    let code = e.target.value;
+    let code = this.code.value;
+    console.log(code)
     this.setState({
       quizCode: code
     })
@@ -49,8 +50,8 @@ class Slide extends React.Component {
                 ) : this.state.getQuizCode ? 
                 (  <FormGroup controlId="formControlsShortAnswer">
                     <ControlLabel>Quiz Code</ControlLabel>
-                    <FormControl componentClass="text" value={this.state.quizCode} placeholder="Enter Quiz Code" />
-                    <Button onSubmit={this.goToQuiz.bind(this)}>Get Quiz</Button>
+                    <input type="textarea" placeholder="Enter Quiz Code" ref={(input) => this.code = input} />
+                    <Button onClick={this.goToQuiz.bind(this)}>Get Quiz</Button>
                   </FormGroup> ) : ''
               )
 
