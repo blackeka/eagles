@@ -78,6 +78,8 @@ exports.createAccount = (req, res) => {
 
 exports.checkUser = (req, res, next) => {
   // make sure the person making requests is logged in
+
+  // next()
   if (!req.session.username) {
     console.log('stopped: ', req.session.username);
     res.redirect('/logout');

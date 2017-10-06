@@ -13,21 +13,30 @@ class Lesson extends React.Component {
       currentSlide: null,
       index: 0,
       videoIdOfClickedOnVideo: '',
-      liked: false
+      liked: false,
+      unlockQuiz: false
     }
   }
 
   componentDidMount() {
-    return fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" })
+     fetch('/lesson/' + this.props.match.params.id, { method: 'GET', credentials: "include" })
       .then((response) => response.json())
       .then((lessonDataJSON) => {
-        // console.log('LESSON DATA', lessonDataJSON);
+        console.log('LESSON DATA', lessonDataJSON);
         this.setState({
           specificLesson: lessonDataJSON,
           slides: lessonDataJSON.slides
         });
-        console.log(this.state.specificLesson);
+        console.log('the specific lesson', this.state.specificLesson);
       })
+      .then( () => {
+          console.log('Role going into lesson', this.props.role);
+          if (this.props.role === 'student') {
+            this.setState({
+              currentSlide: this.state.slides[0]
+            })
+          }
+        })
   }
 
   onLessonSlideListEntryClick(index) {
@@ -65,8 +74,12 @@ class Lesson extends React.Component {
   nextSlideClick(index) {
     index++;
     if (index === this.state.slides.length) {
-      alert('You\'ve made it to the end of the lesson.')
-      this.exit();
+      // alert('You\'ve made it to the end of the lesson.')
+      // this.exit();
+      this.setState({
+        index: index,
+        unlockQuiz: true
+      })
     } else {
       this.setState({
         index: index
@@ -125,6 +138,10 @@ class Lesson extends React.Component {
           nextSlideClick={this.nextSlideClick.bind(this)}
           exitClick={this.exit.bind(this)}
           index={this.state.index}
+          totalLength={this.state.slides.length}
+          role={this.props.role}
+          complete={this.state.unlockQuiz}
+          goToQuiz={() => alert('go to the quiz')}
           />
         ) : (
           <div className="lessonSlideList">
