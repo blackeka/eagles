@@ -41,12 +41,9 @@ class Question extends React.Component {
       shortAnswer: e.target.value
     });
   }
-  //change at a spefic index
+
   mcAnswerChange(e) {
     this.state.mcAnswers[e.target.index] = e.target.value;
-    // this.setState({
-    //   mcAnswers: 
-    // });
   }
 
   relatedSlideChange(e) {
@@ -60,8 +57,6 @@ class Question extends React.Component {
       mcType: 'checkbox',
       answerCount: 0,
       mcAnswers: ['']
-    }, () => {
-      console.log(this.state.mcAnswers)
     });
   }
 
@@ -70,8 +65,6 @@ class Question extends React.Component {
       mcType: 'radio',
       answerCount: 0,
       mcAnswers: ['']
-    }, () => {
-      console.log(this.state.mcType)
     });
   }
 
@@ -80,21 +73,14 @@ class Question extends React.Component {
       mcType: null,
       answerCount: 0,
       mcAnswers: []
-    }, () => {
-      console.log(this.state.mcType)
     });
   }
 
   saveAnswer(answer, correctness) {
-    // e.preventDefault()
-        console.log('save answer', correctness)
     let temp = this.state.mcAnswers;
     temp.push({answer, correctness})
-    console.log(temp)
     this.setState({
       mcAnswers: temp
-    }, () => {
-      console.log(this.state.mcAnswers)
     });
   }
 
@@ -108,16 +94,11 @@ class Question extends React.Component {
 
   deleteOption(e) {
     let temp = [];
-    console.log(e.target.value)
-
     this.state.mcAnswers.map((answer, index) => {
-      console.log(`map ${index}`)
       if(answer !== e.target.value) {
-        console.log('hi')
         temp.push(answer);
       }
     });
-    console.log(temp)
     this.setState({
       mcAnswers: temp
     });

@@ -28,8 +28,6 @@ class Quiz extends React.Component {
     this.setState({
       qforms: forms,
       questionCount: count
-    }, () => {
-      console.log(`here is qforms ${this.state.qforms}`)
     })
   }
   
@@ -45,8 +43,6 @@ class Quiz extends React.Component {
       quizQuestions: qs,
       answers: as,
       relatedSlides: rs
-    }, () => {
-      console.log(this.state)
     })
   }
   
@@ -67,8 +63,6 @@ class Quiz extends React.Component {
         .catch((error) => {
           console.error('error here', error);
         })
-  
-      console.log(questions, answers, relatedSlides, quizCode, lessonRef)
     })
   }
   //axios to return quiz to the lesson
