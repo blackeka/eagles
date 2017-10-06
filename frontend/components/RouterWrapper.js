@@ -34,7 +34,7 @@ class RouterWrapper extends Component {
   }
 
   getLessons() {
-     fetch('/lessons', {
+     return fetch('/lessons', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
