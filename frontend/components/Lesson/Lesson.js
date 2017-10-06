@@ -58,6 +58,10 @@ class Lesson extends React.Component {
     });
   }
 
+  goToQuiz() {
+    
+  }
+
   previousSlideClick(index) {
     index--;
     if (index < 0) {
@@ -141,7 +145,7 @@ class Lesson extends React.Component {
           totalLength={this.state.slides.length}
           role={this.props.role}
           complete={this.state.unlockQuiz}
-          goToQuiz={() => alert('go to the quiz')}
+          goToQuiz={this.goToQuiz.bind(this)}
           />
         ) : (
           <div className="lessonSlideList">
