@@ -53,7 +53,7 @@ var lessonSchema = new Schema({
   userRef: String,
   description: String,
   keyWords: [String],
-  slides: [],
+  slides: [String],
   likes: Number,
   userLikes: [String]
 });

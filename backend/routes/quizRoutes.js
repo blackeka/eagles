@@ -8,12 +8,8 @@ router.post('/quiz', (req, res) => {
   let quizCode = req.body.quizCode;
   let questions = req.body.questions;
   let answers = req.body.answers;
-  let relatedSlides = req.body.relateSlides;
+  let relatedSlides = req.body.relatedSlides;
   let lessonRef = req.body.lessonRef;
-  console.log(req.body, ' or ', req.query, 'or', req.params)
-  console.log(`quizCode: ${quizCode}, questions: ${questions} answers: ${answers} 
-  relatedslides: ${relatedSlides} lessonRef: ${lessonRef} `)
-  console.log('quiz post called')
   Quiz.create({
     quizCode,
     questions,

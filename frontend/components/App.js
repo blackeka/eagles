@@ -18,6 +18,7 @@ class App extends Component {
           userRole = {this.props.userRole}
           isLoggedIn = {this.props.isLoggedIn}
         />
+        { this.props.children || 'no children!' }
       </div>
     );
   }

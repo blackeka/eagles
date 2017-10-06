@@ -11,7 +11,6 @@ class MultipleChoice extends React.Component  {
   }
 
   handleCorrectness(e) {
-    console.log(e.target.value)
     this.setState({
       correctness: e.target.value
     })
