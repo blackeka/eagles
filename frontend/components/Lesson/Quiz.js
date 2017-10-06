@@ -78,19 +78,19 @@ class QuizView extends React.Component {
                     saveAnswer={this.saveAnswer}
                   />
               ))
-            })} <h1> </h1> <Button onClick={() => this.setState({results: true})}>I'm Done!</Button></div>
-             : this.state.results ? 
-                ( this.state.questions.map((question, index) => {
-                  return (
-                    <Results key={index}
-                      question={question} 
-                      answer={this.state.answers[index]}
-                      relatedSlides={this.state.relatedSlides[index]}
-                      mcType={this.state.mcTypes[index]}
-                      student={this.state.studentAnswers[index]}
-                    />
-                  )}
-                )) : <div></div>
+            })} <h1> </h1> <Button onClick={() => this.setState({results: true})}>I'm Done!</Button>
+            </div> : this.state.results ? 
+              this.state.questions.map((question, index) => {
+                return (
+                  <Results key={index}
+                    question={question} 
+                    answer={this.state.answers[index]}
+                    relatedSlides={this.state.relatedSlides[index]}
+                    mcType={this.state.mcTypes[index]}
+                    student={this.state.studentAnswers[index]}
+                  />
+                )}
+              ) : <div></div>
           }
         </Jumbotron>
       </div>
