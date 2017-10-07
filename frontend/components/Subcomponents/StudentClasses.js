@@ -8,7 +8,7 @@ const StudentClasses = (props) => {
 
   return (
     <div classID='classesContainer'>
-      <h3> Classes </h3>
+      <h3> Your Classes: </h3>
       <select value={props.selectedClass} onChange={handleClassChange}>
         <option> - Select your class - </option>
         {props.classList.map((tclass, i) => (

@@ -3,6 +3,7 @@ import axios from 'axios';
 import TeacherClasses from './Subcomponents/TeacherClasses';
 import CreateClass from './Subcomponents/CreateClass';
 import SingleClass from './Subcomponents/SingleClass';
+import { Button} from 'react-bootstrap';
 
 class TeacherDashboard extends React.Component {
   constructor(props) {
@@ -104,10 +105,10 @@ class TeacherDashboard extends React.Component {
   render() {
     return (
       <div classID='teacherDashboardContainer'>
-        <h1> Welcome back, {this.props.username}!</h1><br></br>
+        <h3> Welcome back, {this.props.username}!</h3><br></br>
         <div classID='teacherClasses'>
           <TeacherClasses classList={this.state.classList} teachername={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
-          <button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </button><br></br>
+          <Button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </Button><br></br>
           {this.state.showCreateClassForm ? <CreateClass teachername={this.props.username} createNewClass={this.createNewClass} allLessons={this.props.allLessons}/> : ''}
           <hr></hr>
           <SingleClass selectedClass={this.state.selectedClassObj} role={this.props.role}/>

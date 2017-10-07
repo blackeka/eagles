@@ -10,7 +10,7 @@ const LessonPreview = (props) => {
           {props.lesson.description || 'no description yet'}
           <br />
         <Link to={'/lesson/' + props.lesson._id}>
-          <Button bsStyle="primary" bsSize="small" >View Lesson</Button>
+          {props.lesson.name ? <Button bsStyle="primary" bsSize="small" >View Lesson</Button> : ''}
         </Link>
       </ListGroupItem>
     </div>

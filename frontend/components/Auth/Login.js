@@ -26,6 +26,8 @@ class Login extends Component {
 
   render() {
     return (
+        <div>
+        <h3> Welcome to Class Reactor, a learning platform for students and teachers! </h3>
         <Form horizontal onSubmit={(e) => e.preventDefault()}>
           <FormGroup>
             {
@@ -34,7 +36,7 @@ class Login extends Component {
             }
           </FormGroup>
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>Username</Col>
+            <Col componentClass={ControlLabel} sm={2}></Col>
             <Col sm={10}>
               <FormControl className="username" type='text' placeholder='Username'
                 value={this.state.username}
@@ -43,7 +45,7 @@ class Login extends Component {
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>Password</Col>
+            <Col componentClass={ControlLabel} sm={2}></Col>
             <Col sm={10}>
               <FormControl className="password" type='text' placeholder='Password'
                 value={this.state.password}
@@ -54,9 +56,9 @@ class Login extends Component {
           { this.state.creatingAccount ?
           ( <div>
             <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>Email</Col>
+            <Col componentClass={ControlLabel} sm={2}></Col>
             <Col sm={10}>
-              <FormControl type='email' placeholder='Email'
+              <FormControl className="email" type='email' placeholder='Email'
                 value={this.state.email}
                 onChange={(e) => this.setState({ email: e.target.value })}
               />
@@ -64,11 +66,11 @@ class Login extends Component {
           </FormGroup>
 
           <ButtonToolbar>
-            <ToggleButtonGroup type='radio' name='options' value={this.state.radioVal} onChange={this.onRoleChange}>
+            <ToggleButtonGroup type='radio' name='options' value={this.state.radioVal} onChange={this.onRoleChange} style={toggleButtonStyle}>
               <ToggleButton value={1}> Teacher </ToggleButton>
               <ToggleButton value={2}> Student </ToggleButton>
             </ToggleButtonGroup>
-          </ButtonToolbar>
+          </ButtonToolbar><br></br>
 
           </div>
           )
@@ -100,8 +102,16 @@ class Login extends Component {
             </FormGroup>
           )}
         </Form>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        </div>
         )
     }
+}
+
+const toggleButtonStyle = {
+  position: "relative",
+  display: "inline block",
+  left: "17%"
 }
 
 export default Login;

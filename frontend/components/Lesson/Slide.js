@@ -10,7 +10,7 @@ class Slide extends React.Component {
       quizCode: null
     }
   }
-  
+
   goToQuiz(e) {
     let code = this.code.value;
     console.log(code)
@@ -22,7 +22,7 @@ class Slide extends React.Component {
   render() {
     return (
       <div>
-      {!this.state.quizCode ? 
+      {!this.state.quizCode ?
         (<div style={slideContainerStyle}>
           <h1>{ this.props.slideData.name || 'No Slide Name' }</h1>
           <div className="youtubeVideoContainer">
@@ -47,7 +47,7 @@ class Slide extends React.Component {
               </div> )
               : ( this.props.complete && !this.state.getQuizCode ? (
                   <Button type="button" onClick={() => this.setState({getQuizCode: true})}>Quiz</Button>
-                ) : this.state.getQuizCode ? 
+                ) : this.state.getQuizCode ?
                 (  <FormGroup controlId="formControlsShortAnswer">
                     <ControlLabel>Quiz Code</ControlLabel>
                     <input type="textarea" placeholder="Enter Quiz Code" ref={(input) => this.code = input} />
@@ -57,7 +57,7 @@ class Slide extends React.Component {
 
             }
           </div>
-        </div>) : 
+        </div>) :
         <Quiz quizCode={this.state.quizCode} role={this.props.role} />
         }
       </div>
@@ -70,7 +70,8 @@ const slideContainerStyle = {
   borderRadius: "10px",
   width: "65%",
   margin: 'auto',
-  textAlign: "center"
+  textAlign: "center",
+  backgroundColor: "#f7f4f4"
 }
 
 export default Slide;
