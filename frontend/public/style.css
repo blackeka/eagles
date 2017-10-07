@@ -17,7 +17,7 @@ body {
   display: inline;
   margin-left: 5px;
   margin-right: 5px;
-  padding: 0px; 
+  padding: 0px;
   border: 0px;
 }
 
@@ -25,4 +25,12 @@ body {
   cursor:pointer;
   color:blue;
   text-decoration:underline;
+}
+
+.correct-answer {
+  color: green;
+}
+
+.incorrect-answer {
+  color: red;
 }
