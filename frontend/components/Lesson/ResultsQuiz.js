@@ -21,7 +21,7 @@ class Results extends React.Component {
     let answer = this.props.answer;
     if (this.props.question.length) {
       if (this.props.mcType === 'radio'){
-        let answers = this.props.answer.filter(answer => answer.correctness === 'correct').map(answers => answers.answer)   
+        let answers = this.props.answer.filter(answer => answer.correctness === 'correct').map(answers => answers.answer)
         if (answers[0] === this.props.student){
           correct = 'correct-answer';
         } else {
