@@ -26,7 +26,7 @@ Enzyme.configure({ adapter: new Adapter() })
 //   })
 // })
 test('QuestionView renders with props', () => {
-  const component = render.create(
+  const component = shallow(
     <QuestionView 
       question="What is 2+2?" 
       answer="4"
@@ -35,7 +35,10 @@ test('QuestionView renders with props', () => {
       saveAnswer={() => {console.log(saved)}}
     />
   );
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  // let tree = component.toJSON();
+  expect(component).toMatchSnapshot();
 })
-
+// test('Search renders correctly', () => {
+//   const component = shallow(<UnwrappedSearch searchTerm="" shows={preload.shows} />);
+//   expect(component).toMatchSnapshot();
+// })
