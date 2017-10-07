@@ -47,7 +47,7 @@ class Login extends Component {
           <FormGroup>
             <Col componentClass={ControlLabel} sm={2}></Col>
             <Col sm={10}>
-              <FormControl className="password" type='text' placeholder='Password'
+              <FormControl className="password" type='password' placeholder='Password'
                 value={this.state.password}
                 onChange={(e) => this.setState({ password: e.target.value })}
               />
@@ -102,7 +102,7 @@ class Login extends Component {
             </FormGroup>
           )}
         </Form>
-        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         </div>
         )
     }

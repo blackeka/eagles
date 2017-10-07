@@ -30,8 +30,7 @@ class TeacherDashboard extends React.Component {
       console.log('response from classes endpoint', JSONresponse)
       var teachersClasses = JSONresponse.filter((clas) => clas.teacher === this.props.username)
       this.setState({
-        classList: teachersClasses,
-        selectedClassName: teachersClasses[0].name
+        classList: teachersClasses
       }, () => console.log('state after mount', this.state))
     })
     .then( () => {
@@ -45,8 +44,7 @@ class TeacherDashboard extends React.Component {
           var newClassListWithStudents = this.state.classListWithStudents;
           newClassListWithStudents.push(klass);
           this.setState({
-            classListWithStudents: newClassListWithStudents,
-            selectedClassObj: newClassListWithStudents[0]
+            classListWithStudents: newClassListWithStudents
           })
         })
       })
@@ -105,7 +103,7 @@ class TeacherDashboard extends React.Component {
   render() {
     return (
       <div classID='teacherDashboardContainer'>
-        <h3> Welcome back, {this.props.username}!</h3><br></br>
+        <h3> Welcome back, {this.props.username}!</h3>
         <div classID='teacherClasses'>
           <TeacherClasses classList={this.state.classList} teachername={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
           <Button onClick={() => this.setState({ showCreateClassForm: true})}> Create new class </Button><br></br>
@@ -113,6 +111,7 @@ class TeacherDashboard extends React.Component {
           <hr></hr>
           <SingleClass selectedClass={this.state.selectedClassObj} role={this.props.role}/>
         </div>
+        <br/><br/><br/><br/><br/>
       </div>
     )
   }

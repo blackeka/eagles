@@ -28,7 +28,7 @@ class NavBar extends Component {
       {
         this.props.isLoggedIn ? (
           this.props.userRole === 'teacher' ? (
-            <Navbar>
+            <Navbar style={navBarStyleTeacher}>
               <Navbar.Form pullLeft>
                 <Form onSubmit={ (e) => {
                   e.preventDefault();
@@ -69,7 +69,7 @@ class NavBar extends Component {
             </Navbar>
           ) : (
 
-            <Navbar>
+            <Navbar style={navBarStyleStudent}>
               <Navbar.Form pullLeft>
                 <Form onSubmit={ (e) => {
                   e.preventDefault();
@@ -94,6 +94,20 @@ class NavBar extends Component {
       </div>
     );
   }
+}
+
+const navBarStyleTeacher = {
+  position: 'absolute',
+  top: '6%',
+  right: '5%',
+  width: "60%"
+}
+
+const navBarStyleStudent = {
+  position: 'absolute',
+  top: '6%',
+  right: '5%',
+  width: "23%"
 }
 
 export default NavBar;

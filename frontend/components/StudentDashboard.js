@@ -29,8 +29,7 @@ class StudentDashboard extends React.Component {
       .then((JSONresponse) => {
         var studentClassList = JSONresponse.filter((clas) => studentClasses.includes(clas.name) || studentClasses.includes(clas._id))
         this.setState({
-          classList: studentClassList,
-          selectedClassName: studentClassList[0].name
+          classList: studentClassList
         }, () => {
           this.selectClass(this.state.selectedClassName);
           this.getPendingApplications();
@@ -80,6 +79,7 @@ class StudentDashboard extends React.Component {
           <li key={i}> '{app.class}' taught by {app.teacher}</li>
         ))}
         </ol>
+        <br/><br/><br/><br/>
       </div>
     )
   }

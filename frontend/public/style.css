@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  height: 100%;
   padding: 5%;
   background: linear-gradient(#4080d6, #f2f4f7);
   background-repeat: no-repeat;
