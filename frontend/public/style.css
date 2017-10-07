@@ -91,3 +91,11 @@ progress[value]::-webkit-progress-value {
   color:blue;
   text-decoration:underline;
 }
+
+.correct-answer {
+  color: green;
+}
+
+.incorrect-answer {
+  color: red;
+}

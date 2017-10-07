@@ -7,54 +7,67 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: null, 
+      question: null,
       answer: null,
       relatedSlides: null,
       mcType: null,
-      studentAnswers: null
+      studentAnswers: null,
+      correct: 'na'
     }
-    this.answerChange = this.answerChange 
   }
 
   componentWillMount() {
-    var answer;
+    let correct;
+    let answer = this.props.answer;
     if (this.props.question.length) {
-      if (this.props.mcType === false) {
-        answer = this.props.answer;
-      } else {
-        answer = this.props.answer
+      if (this.props.mcType === 'radio'){
+        let answers = this.props.answer.filter(answer => answer.correctness === 'correct').map(answers => answers.answer)   
+        if (answers[0] === this.props.student){
+          correct = 'correct-answer';
+        } else {
+          correct = 'incorrect-answer'
+        }
+      } else if (this.props.mcType === 'checkbox'){
+        let answers = this.props.answer.filter(answer => answer.correctness === 'correct').map(answers => answers.answer);
+        let testAnswers = this.props.student.split(',').map(answer => answer.trim())
+        let checkCheckbox = testAnswers.every(sAnswer => answers.indexOf(sAnswer.trim()) >= 0)
+        if (checkCheckbox && testAnswers.length === answers.length){
+          correct = 'correct-answer';
+        } else {
+          correct = 'incorrect-answer'
+        }
       }
       this.setState({
         question: this.props.question,
         answer: answer,
         relatedSlides: this.props.relatedSlides,
         mcType: this.props.mcType,
-        studentAnswers: this.props.student
+        studentAnswers: this.props.student,
+        correct: correct
       }, () => {
         console.log('this.state', this.state)
       })
     }
   }
 
-
   render() {
     return (
       <div className="question-view">
-        {this.state.question ?  
-        <div>     
+        {this.state.question ?
+        <div>
           <h3>{this.state.question}</h3>
-          {this.state.mcType === "false" ? 
+          {this.state.mcType === "false" ?
             <FormGroup controlId="formControlsShortAnswer">
               <ControlLabel>Short Answer</ControlLabel>
-              <FormControl 
-                componentClass="textarea" 
+              <FormControl
+                componentClass="textarea"
                 defaultValue={`Correct answer: ${this.state.answer}`}
                 disabled
               />
-            </FormGroup> : 
+            </FormGroup> :
             <div>
               <FormGroup controlId="formControlsMultipleChoice">
-              {this.state.mcType === 'checkbox' ? 
+              {this.state.mcType === 'checkbox' ?
                   this.state.answer.map((answer, index) => {
                     if (answer.answer) {
                       return (
@@ -62,7 +75,7 @@ class Results extends React.Component {
                       )
                     }
                   })
-                : 
+                :
                   this.state.answer.map((answer, index) => {
                     if (answer.answer) {
                       return (
@@ -70,13 +83,13 @@ class Results extends React.Component {
                       )
                     }
                   })
-              } 
+              }
               </FormGroup>
             </div>
-          } <h4>{`You answered: ${this.state.studentAnswers}`}</h4></div> : <div></div>
+          } <h4 className={this.state.correct}>{`You answered: ${this.state.studentAnswers}`}</h4></div> : <div></div>
         }
       </div>
-    ) 
+    )
   }
 }
 
