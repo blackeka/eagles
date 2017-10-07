@@ -85,7 +85,7 @@ app.use((req, res) => {
 });
 
 app.get('*', function(req, res) {
-  res.status(404).send()
+  res.status(404).send();
 })
 // server listens for requests
 app.listen(process.env.PORT || 3000);
