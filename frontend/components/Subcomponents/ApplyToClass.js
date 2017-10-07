@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import { Button} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 const ApplyToClass = (props) => {
 
@@ -29,10 +29,15 @@ const ApplyToClass = (props) => {
 
     return (
       <div className='apply'>
+      <Modal show={props.showApp} onHide={props.hideApplicationCb}>
+        <Modal.Body>
         <h4> Why do you want to join this class? What do you hope to gain from it?</h4>
         <textarea rows="6" cols="50" onChange={handleTextChange}></textarea><br></br>
         <Button className='appsubmit' onClick={sendApplication}> Apply to {props.classObj.name}</Button>
-      </div>
+        <Button className='cancel' onClick={props.hideApplicationCb}> Cancel</Button>
+        </Modal.Body>
+      </Modal>
+    </div>
     )
 
 };

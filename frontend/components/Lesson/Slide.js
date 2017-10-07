@@ -60,6 +60,7 @@ class Slide extends React.Component {
         </div>) :
         <Quiz quizCode={this.state.quizCode} role={this.props.role} />
         }
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
     );
   }

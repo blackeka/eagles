@@ -52,15 +52,15 @@ class BrowseClasses extends React.Component {
       applicationText: '',
       showApplication: false
     })
-    var alertMessage = `<p id='appSentMsg'> Your application was sent to the instructor, ${this.state.selectedClass.teacher}; you will get a notification when they decide if you can enroll in the class! [Click to hide this message]</p>`
-    $('.successMessage').append(alertMessage);
-    $('#appSentMsg').click(() => $('#appSentMsg').remove())
+    // var alertMessage = `<p id='appSentMsg'> Your application was sent to the instructor, ${this.state.selectedClass.teacher}; you will get a notification when they decide if you can enroll in the class! [Click to hide this message]</p>`
+    // $('.successMessage').append(alertMessage);
+    // $('#appSentMsg').click(() => $('#appSentMsg').remove())
   }
 
   render() {
     return (
       <div classID='browseClassesContainer'>
-
+        <h2> Current Class List </h2>
         {this.state.classList.map((klass, i) => (
           <div className='browseClass' key={klass.name} classID={klass.name} style={browseClassStyle} onClick={this.handleClassSelect}>
             <a> Class name: {klass.name} </a><br></br>
@@ -71,7 +71,7 @@ class BrowseClasses extends React.Component {
         {this.state.showApplication ?
           <ApplyToClass classObj={this.state.selectedClass} studentname={this.props.studentname}
                         applicationTextCb={this.applicationTextCb} appText={this.state.applicationText}
-                        hideApplicationCb={this.closeApp}/>
+                        hideApplicationCb={this.closeApp} showApp={this.state.showApplication}/>
         : ''}
         <div className='successMessage'></div>
 
@@ -85,8 +85,9 @@ const browseClassStyle = {
   borderRadius: "50px",
   display: "inline block",
   textAlign: "center",
-  width: "30%",
-  color: "black"
+  width: "33%",
+  color: "black",
+  fontFamily: "Montserrat"
 }
 
 export default BrowseClasses;
