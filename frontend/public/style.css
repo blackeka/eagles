@@ -1,5 +1,5 @@
 html {
-  height: 100%;
+  height: auto;
 }
 
 body {
@@ -36,10 +36,14 @@ progress[value]::-webkit-progress-value {
         animation: animate-stripes 5s linear infinite;
 }
 
-h2 {
+#header {
   position: absolute;
-  top: 20px;
+  top: 0px;
   left: 105px;
+  font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+  font-size: 42px;
 }
 
 #logo {
@@ -47,10 +51,10 @@ h2 {
   height: 100px;
   width: 100px;
   left: 5px;
-  top: 5px;
+  top: 15px;
 }
 
-.username, .email, .password {
+.username, .email, .password, .nameOfClass, .classSelector {
   width: 25%;
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import {Button} from 'react-bootstrap'
 
 class TeacherApplications extends React.Component {
   constructor(props) {
@@ -95,8 +96,8 @@ class TeacherApplications extends React.Component {
             <p> Student name: {app.student} </p>
             <p> Class: {app.class} </p>
             <p> Reason: {app.reason} </p>
-            <button onClick={this.approveStudent}> Approve </button>
-            <button onClick={this.rejectStudent}> Reject </button>
+            <Button onClick={this.approveStudent}> Approve </Button>
+            <Button onClick={this.rejectStudent}> Reject </Button>
           </div>
         )) : ''}
 

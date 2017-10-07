@@ -39,12 +39,12 @@ class CreateClass extends React.Component {
   render() {
     return (
       <div className='classForm'>
-
+        <br></br>
         <Form horizontal onSubmit={(e) => e.preventDefault()}>
           <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>ClassName</Col>
+            <Col componentClass={ControlLabel} sm={10}></Col>
             <Col sm={10}>
-              <FormControl type='text' placeholder='Class Name'
+              <FormControl className='nameOfClass' type='text' placeholder='Class Name'
                 value={this.state.className}
                 onChange={(e) => this.setState({ className: e.target.value })}
               />
@@ -55,7 +55,7 @@ class CreateClass extends React.Component {
             {this.props.allLessons.map((lesson, i) => (
               <option key={i}> {lesson.name} </option>
             ))}
-          </select>
+          </select><br></br><br></br>
           <FormGroup>
             <Col sm={10}>
             <Button onClick={this.handleSubmit}>
