@@ -1,5 +1,66 @@
+html {
+  height: 100%;
+}
+
 body {
   padding: 5%;
+  background: linear-gradient(#4080d6, #f2f4f7);
+  background-repeat: no-repeat;
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+
+  width: 175px;
+  height: 20px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image:
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, .25),
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, #f44, #09c);
+
+    border-radius: 50px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+    -webkit-animation: animate-stripes 5s linear infinite;
+        animation: animate-stripes 5s linear infinite;
+}
+
+h2 {
+  position: absolute;
+  top: 20px;
+  left: 105px;
+}
+
+#logo {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  left: 5px;
+  top: 5px;
+}
+
+.username, .email, .password {
+  width: 25%;
+}
+
+.LessonPreview {
+  width: 30%;
+  text-align: center;
+}
+
+.browseClass, .singleApp {
+  background-color: white;
 }
 
 .lessonCreator, .slideCreator{
@@ -17,7 +78,7 @@ body {
   display: inline;
   margin-left: 5px;
   margin-right: 5px;
-  padding: 0px; 
+  padding: 0px;
   border: 0px;
 }
 

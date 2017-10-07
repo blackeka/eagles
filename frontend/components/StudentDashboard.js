@@ -70,7 +70,7 @@ class StudentDashboard extends React.Component {
   render() {
     return (
       <div classID='studentdashboard'>
-        <h2> Welcome back, {this.props.studentname} </h2>
+        <h3> Welcome back, {this.props.studentname}!</h3>
         <StudentClasses classList={this.state.classList} studentname={this.props.username} selectedClass={this.state.selectedClassName} classSelectCb={this.selectClass} /><br></br>
         <SingleClass selectedClass={this.state.selectedClassObj} role={this.props.role}/><br></br>
         <h3> Pending Applications: </h3>
