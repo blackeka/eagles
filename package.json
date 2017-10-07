@@ -4,7 +4,7 @@
   "description": "Greenfield Project",
   "scripts": {
     "test": "jest",
-    "start": "node server.js",
+    "start": "node backend/server.js",
     "compile": "webpack --watch",
     "cypress:open": "cypress open"
   },
