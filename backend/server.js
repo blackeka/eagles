@@ -87,7 +87,11 @@ app.use((req, res) => {
 });
 
 app.get('*', function(req, res) {
+<<<<<<< HEAD
   res.status(404).send();
+=======
+  res.status(404).send()
+>>>>>>> ac48b099cd1fed58b917e61bc64435fde6b08024
 })
 // server listens for requests
 app.listen(process.env.PORT || 3000);
